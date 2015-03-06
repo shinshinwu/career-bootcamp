@@ -1,7 +1,8 @@
 class Question < ActiveRecord::Base
   belongs_to :topic
+  belongs_to :user
   has_many :answers
-  has_many :types
+  has_many :resources
 
   def upvote
     self.votes += 1

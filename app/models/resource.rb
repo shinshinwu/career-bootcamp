@@ -1,5 +1,5 @@
 class Resource < ActiveRecord::Base
-  belongs_to :topic
+  belongs_to :question
 
   def upvote
     self.votes += 1

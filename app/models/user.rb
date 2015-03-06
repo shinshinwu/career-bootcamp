@@ -1,11 +1,17 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  has_many :tracks
-  has_many :questions, through: :tracks
-  has_many :answers, through: :questions
-  has_many :topics
-  has_many :resources, through: :topics
+  has_many :questions
+  has_many :answers
+  has_many :resources
+
+  validates :username, :presence => true,
+                       :uniqueness => true,
+                       :length: { maximum: 50 }
+  validates :email,    :presence => true,
+                       :uniqueness => true,
+                       :format => { :with => /\w+@\w+\.\w+/ }
+  validates :password_hash, :presence => true
 
   include BCrypt
 
