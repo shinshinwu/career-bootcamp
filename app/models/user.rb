@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                        :uniqueness => true,
                        :format => { :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
   # def password
   #   @password ||= Password.new(password_hash)
@@ -25,5 +25,3 @@ class User < ActiveRecord::Base
   #   user = User.find_by(email: params[:email])
   #   (user && user.password == params[:password]) ? user : nil
   # end
->>>>>>> wrote simple user controller action and added sessions
-end
