@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+  <title>Test</title>
+  <style>
+    button {
+      width: 30px;
+      height: 30px;
+    }
+    audio {
+      margin-left: 200px;
+    }
+    .record-inactive {
+      background-color: red;
+      border-radius: 50px;
+    }
+    .record-active {
+      background-color: grey;
+      border-radius: 0px;
+    }
+    .record:active, .record:focus {
+      outline: 0;
+      border:0;
+    }
+    .play {
+      margin-top: 20px;
+    }
+    .play-inactive {
+      background-color: transparent;
+      width: 0; 
+      height: 0; 
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 30px solid green;
+    }
+    .play-active {
+      width: 30px;
+      height: 30px;
+      background-color: red;
+    }
+
+  </style>
+  <body>
+
+    <button id="record-btn" class="record record-active"></button>
+    <div id="play-btn" class="play play-active"></div>
+    <audio controls>Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
+
+    <textarea id="code-area" class="code-area">
+      
+    </textarea>
+
+    <script type="text/javascript" src="modernizr.js"></script>
+    <script type="text/javascript" src="audio-test.js"></script>
+    <script type="text/javascript" src="form-test.js"></script>
+  </body>
+</html>
