@@ -24,4 +24,13 @@ describe UsersController do
     end
   end
 
+  describe "PATCH user/:id/edit" do
+    it "update the user information with new info when logged in" do
+      log_in_as(@user)
+      patch :update, id: @user, :user => { username: "banana", email: @user.email, password: @user.password }
+      @user.reload
+      expect(@user.username).to eq("banana")
+    end
+  end
+
 end
