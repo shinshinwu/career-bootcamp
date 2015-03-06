@@ -20,16 +20,17 @@ AudioController.prototype = {
     }
   },
   playButtonListener: function (){
-    var self = this;
-    document.getElementById("play-btn").addEventListener('click', function(){
-      if (this.classList.contains("play-inactive")){
-        this.classList.add('play-active');
-        this.classList.remove('play-inactive');
+    var btn = document.getElementById("play-btn")
+
+    btn.addEventListener('click', function(){
+      if (btn.classList.contains("play-inactive")){
+        btn.classList.add('play-active');
+        btn.classList.remove('play-inactive');
       } else {
-        this.classList.remove('play-active');
-        this.classList.add('play-inactive');
+        btn.classList.remove('play-active');
+        btn.classList.add('play-inactive');
       }
-    });
+    }.bind(this));
   },
   prepareMedia: function (localAudioStream){
     console.log("read");
@@ -43,18 +44,18 @@ AudioController.prototype = {
     // };
   },
   recordButtonListener: function(){
-    var self = this;
-    document.getElementById("record-btn").addEventListener('click', function(){
-      if (this.classList.contains("record-inactive")){
+    var btn = document.getElementById("record-btn");
+    btn.addEventListener('click', function(){
+      if (btn.classList.contains("record-inactive")){
         // self.startRecording();
-        this.classList.add('record-active');
-        this.classList.remove('record-inactive');
+        btn.classList.add('record-active');
+        btn.classList.remove('record-inactive');
       } else {
         // self.stopRecording();
-        this.classList.remove('record-active');
-        this.classList.add('record-inactive');
+        btn.classList.remove('record-active');
+        btn.classList.add('record-inactive');
       }
-    });
+    }.bind(this));
   },
   startRecording: function (){
     this.localAudioStream.record();
