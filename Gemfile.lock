@@ -105,8 +105,6 @@ GEM
     json (1.8.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libnotify (0.9.1)
-      ffi (>= 1.0.11)
     listen (2.8.5)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -266,7 +264,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  libnotify
   pg
   poltergeist
   pry-rails
