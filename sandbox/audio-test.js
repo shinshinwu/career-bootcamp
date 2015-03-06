@@ -2,10 +2,7 @@
 
 var AudioController = function(){
   this.prepareAPI();
-  this.recordButtonListener();
-  this.playButtonListener();
 };
-
 
 AudioController.prototype = {
   errorCallback: function(err){
@@ -19,21 +16,16 @@ AudioController.prototype = {
       console.log("Audio recording not supported on your browser, switch to Firefox or Chrome");
     }
   },
-  playButtonListener: function (){
-    var btn = document.getElementById("play-btn")
-
-    btn.addEventListener('click', function(){
-      if (btn.classList.contains("play-inactive")){
-        btn.classList.add('play-active');
-        btn.classList.remove('play-inactive');
-      } else {
-        btn.classList.remove('play-active');
-        btn.classList.add('play-inactive');
-      }
-    }.bind(this));
+  playButtonEvent: function (btn){
+    if (btn.classList.contains("play-inactive")){
+      btn.classList.add('play-active');
+      btn.classList.remove('play-inactive');
+    } else {
+      btn.classList.remove('play-active');
+      btn.classList.add('play-inactive');
+    }
   },
   prepareMedia: function (localAudioStream){
-    console.log("read");
     var audio = document.querySelector('audio');
     audio.src = window.URL.createObjectURL(localAudioStream);
     console.log(audio.src);
@@ -43,19 +35,16 @@ AudioController.prototype = {
       // console.log("Hey all done");
     // };
   },
-  recordButtonListener: function(){
-    var btn = document.getElementById("record-btn");
-    btn.addEventListener('click', function(){
-      if (btn.classList.contains("record-inactive")){
-        // self.startRecording();
-        btn.classList.add('record-active');
-        btn.classList.remove('record-inactive');
-      } else {
-        // self.stopRecording();
-        btn.classList.remove('record-active');
-        btn.classList.add('record-inactive');
-      }
-    }.bind(this));
+  recordButtonEvent: function(btn){
+    if (btn.classList.contains("record-inactive")){
+      // self.startRecording();
+      btn.classList.add('record-active');
+      btn.classList.remove('record-inactive');
+    } else {
+      // self.stopRecording();
+      btn.classList.remove('record-active');
+      btn.classList.add('record-inactive');
+    }
   },
   startRecording: function (){
     this.localAudioStream.record();

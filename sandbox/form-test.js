@@ -1,5 +1,5 @@
 var FormController = function(){
-  this.formListener();
+  this.formEvent();
   this.formPending = false;
   this.formCaptures = [];
 }
@@ -13,12 +13,20 @@ FormController.prototype = {
       this.formPending = false;
     }.bind(this), 2000);
   },
-  formListener: function() {
-    document.getElementById("code-area").addEventListener("keyup", function(){
-        if(this.formPending == false){
-          this.formCapture();  
-        }
-    }.bind(this));
+  formDisable: function() {
+    var codearea = document.getElementById("code-area");
+    codearea.disabled = true;
+    codearea.classList.add("code-disabled");
+  },
+  formEnable: function(){
+    var codearea = document.getElementById("code-area");
+    codearea.disabled = false;
+    codearea.classList.remove("code-disabled");
+  },
+  formEvent: function() {
+    if(this.formPending == false){
+      this.formCapture();  
+    }
   },
 }
 

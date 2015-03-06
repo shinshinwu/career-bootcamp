@@ -44,20 +44,31 @@
       width: 500px;
       height: 700px;
     }
+    .code-disabled {
+      background-color: lightgrey;
+    }
+    .hide {
+      display: none;
+    }
 
   </style>
   <body>
 
+  <h1 id="timer">2:00</h1>
+  <h2 id="question" class="hide">Describe how GitHub optimizes your workflow</h2>
     <button id="record-btn" class="record record-active"></button>
     <div id="play-btn" class="play play-active"></div>
     <audio controls>Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
 
-    <textarea id="code-area" class="code-area">
+    <textarea id="code-area" class="code-area code-disabled" disabled>
       
     </textarea>
 
     <script type="text/javascript" src="modernizr.js"></script>
     <script type="text/javascript" src="audio-test.js"></script>
     <script type="text/javascript" src="form-test.js"></script>
+    <script type="text/javascript" src="timer-test.js"></script>
+    <script type="text/javascript" src="master-test.js"></script>
+
   </body>
 </html>
