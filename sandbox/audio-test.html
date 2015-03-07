@@ -37,6 +37,12 @@
       height: 30px;
       background-color: red;
     }
+    .playback-text{
+      color: green;
+    }
+    .playback-form{
+      background-color: lightgreen;
+    }
     textarea {
       display: block;
     }
@@ -54,10 +60,10 @@
   </style>
   <body>
 
-  <h1 id="timer">2:00</h1>
+  <h1 id="timer">&nbsp;</h1>
   <h2 id="question" class="hide">Describe how GitHub optimizes your workflow</h2>
     <button id="record-btn" class="record record-active"></button>
-    <div id="play-btn" class="play play-active"></div>
+    <div id="play-btn" class="play play-active hide"></div>
     <audio controls>Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
 
     <textarea id="code-area" class="code-area code-disabled" disabled>

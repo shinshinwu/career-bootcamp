@@ -54,4 +54,4 @@ AudioController.prototype = {
   }
 };
 
-var audioController = new AudioController();
+// var audioController = new AudioController();
