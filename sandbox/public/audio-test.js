@@ -11,12 +11,7 @@ AudioController.prototype = {
   prepareAPI: function (){
     var getMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
     if (getMedia){
-      navigator.webkitGetUserMedia({video: true, audio: true}, function(d){
-//        var audio = document.querySelector('video');
-//        audio.src = window.URL.createObjectURL(d);
-//      }, function(e){
-//        console.log(2, e);
-      });
+      navigator.webkitGetUserMedia({video: false, audio: true}, this.prepareMedia, this.errorCallback);
     } else {
       console.log("Audio recording not supported on your browser, switch to Firefox or Chrome");
     }
