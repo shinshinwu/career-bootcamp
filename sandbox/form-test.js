@@ -2,35 +2,40 @@ var FormController = function(){
   this.formEvent();
   this.formPending = false;
   this.formCaptures = {};
+  this.formCaptures[0] = "";
+  this.codearea = document.getElementById("code-area");
 }
 
 FormController.prototype = {
   formCapture: function(time) {
     this.formPending = true;
     window.setTimeout(function(){
-      var code = document.getElementById("code-area").value;
-      this.formCaptures[time] = code
+      var code = this.codearea.value;
+      this.formCaptures[time] = code;
       this.formPending = false;
-    }.bind(this), 2000);
+    }.bind(this), 500);
   },
   formDisable: function() {
-    codearea.disabled = true;
-    codearea.classList.add("code-disabled");
+    this.codearea.disabled = true;
+    this.codearea.classList.add("code-disabled");
+    this.codearea.classList.remove("code-playback");
   },
   formEnable: function(){
-    var codearea = document.getElementById("code-area");
-    codearea.disabled = false;
-    codearea.classList.remove("code-disabled");
+    this.codearea.disabled = false;
+    this.codearea.classList.remove("code-disabled");
+  },
+  formPlaybackEnable: function(){
+    this.codearea.classList.remove("code-disabled");
+    this.codearea.classList.add("code-playback");
   },
   formEvent: function(time) {
-    if(this.formPending == false){
+    if (this.formPending == false){
       this.formCapture(time);  
     }
   },
   formPlayback: function(time){
-    var codearea = document.getElementById("code-area");
     if (time in this.formCaptures){
-      codearea.value = this.formCaptures[time];
+      this.codearea.value = this.formCaptures[time];
     }
   }
 }
