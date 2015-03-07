@@ -17,13 +17,6 @@ AudioController.prototype = {
     }
   },
   playButtonEvent: function (btn){
-    if (btn.classList.contains("play-inactive")){
-      btn.classList.add('play-active');
-      btn.classList.remove('play-inactive');
-    } else {
-      btn.classList.remove('play-active');
-      btn.classList.add('play-inactive');
-    }
   },
   prepareMedia: function (localAudioStream){
     var audio = document.querySelector('audio');
@@ -36,15 +29,6 @@ AudioController.prototype = {
     // };
   },
   recordButtonEvent: function(btn){
-    if (btn.classList.contains("record-inactive")){
-      // self.startRecording();
-      btn.classList.add('record-active');
-      btn.classList.remove('record-inactive');
-    } else {
-      // self.stopRecording();
-      btn.classList.remove('record-active');
-      btn.classList.add('record-inactive');
-    }
   },
   startRecording: function (){
     this.localAudioStream.record();
