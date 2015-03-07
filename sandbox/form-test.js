@@ -1,20 +1,19 @@
 var FormController = function(){
   this.formEvent();
   this.formPending = false;
-  this.formCaptures = [];
+  this.formCaptures = {};
 }
 
 FormController.prototype = {
-  formCapture: function() {
+  formCapture: function(time) {
     this.formPending = true;
     window.setTimeout(function(){
       var code = document.getElementById("code-area").value;
-      this.formCaptures.push(code)
+      this.formCaptures[time] = code
       this.formPending = false;
     }.bind(this), 2000);
   },
   formDisable: function() {
-    var codearea = document.getElementById("code-area");
     codearea.disabled = true;
     codearea.classList.add("code-disabled");
   },
@@ -23,11 +22,17 @@ FormController.prototype = {
     codearea.disabled = false;
     codearea.classList.remove("code-disabled");
   },
-  formEvent: function() {
+  formEvent: function(time) {
     if(this.formPending == false){
-      this.formCapture();  
+      this.formCapture(time);  
     }
   },
+  formPlayback: function(time){
+    var codearea = document.getElementById("code-area");
+    if (time in this.formCaptures){
+      codearea.value = this.formCaptures[time];
+    }
+  }
 }
 
-formController = new FormController();
+// formController = new FormController();
