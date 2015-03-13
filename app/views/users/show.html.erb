@@ -1,1 +1,29 @@
-<h1>User profile page</h1>
+<h1><%= @user.username %>'s profile page</h1>
+
+<h2>Questions Submitted</h2>
+<ul>
+  <% @user.questions.each do |question| %>
+  <li>Votes: <%= question.votes %></li>
+  <li><a href="/questions/<%= question.id %>"><%= question.title %></a></li>
+  <li>Category: <%= question.job_title %></li>
+  <li>Interview Type: <%= question.interview_type %></li>
+  <li>Topic: <%= question.topic.topic_name %></li>
+  <% end %>
+</ul>
+
+<h2>Answers Submitted</h2>
+<ul>
+  <% @user.answers.each do |answer| %>
+  <li>Votes: <%= answer.votes %></li>
+  <li><a href="/questions/<%= answer.question.id %>"><%= answer.content %></a></li>
+  <% end %>
+</ul>
+
+<h2>Resources Submitted</h2>
+<ul>
+  <% @user.resources.each do |resource| %>
+  <li>Votes: <%= resource.votes %></li>
+  <li><a href="<%= resource.link %>"><%= resource.title %></a></li>
+  <li>Content: <%= resource.content %></li>
+  <% end %>
+</ul>

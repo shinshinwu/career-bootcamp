@@ -11,6 +11,21 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'tracks' => 'questions#index'
+  resources :questions do
+    member do
+      patch 'upvote', to: 'questions#upvote'
+      patch 'downvote', to: 'questions#downvote'
+    end
+    resources :answers do
+      patch 'upvote', to: 'answers#upvote'
+      patch 'downvote', to: 'answers#downvote'
+    end
+    resources :resources do
+      patch 'upvote', to: 'resources#upvote'
+      patch 'downvote', to: 'resources#downvote'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

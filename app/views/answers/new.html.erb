@@ -1,0 +1,13 @@
+<h1>Adding New Answer</h1>
+
+<!-- need to figure out some way to show different type of answer form depends on the interview question type such as phone or in person etc -->
+
+<%= form_for(@answer) do |f| %>
+
+
+  <%= f.lable :content, 'Your Answer' %>
+  <%= f.text_field :content %>
+
+  <%= f.submit "Submit" %>
+
+<% end %>

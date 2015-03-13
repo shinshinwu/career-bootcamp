@@ -1,0 +1,36 @@
+<h1>Top Nav Bar Stuff</h1>
+
+<h2>Question: <%= @question.title %></h2>
+<ul>
+  <li>Votes: <%= @question.votes %> (<%= link_to "Upvote", upvote_question_path(@question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(@question.id), method: :patch %>)</li>
+  <li>Content: <%= @question.content %></li>
+  <li>Category: <%= @question.job_title %></li>
+  <li>Interview Type: <%= @question.interview_type %></li><li>Topic: <%= @question.topic.topic_name %></li>
+</ul>
+
+<h2>User submitted Resources</h2>
+<ul>
+<% @resources.each do |resource| %>
+  <li>Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote(question_id: @question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote(question_id: @question.id, resource_id: resource.id), method: :patch %>)  <a href="<%= resource.link %>"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %></li>
+  <li>
+<% end %>
+</ul>
+
+<% if @user.submitted_answer?(@question.id) %>
+
+<h2>User submitted Answers</h2>
+<ul>
+<% @answers.each do |answer| %>
+  <li>Votes: <%= answer.votes %> (<%= link_to "Upvote", question_answer_upvote(question_id: @question.id, answer_id: answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote(question_id: @question.id, answer_id: answer.id), method: :patch %>)  <%= link_to "View Answer", question_answer(question_id: @question.id, answer_id: answer.id), method: :get %></li>
+  <li>
+<% end %>
+</ul>
+
+
+<% else %>
+
+<h2>Ready to Submit Your Answer?</h2>
+
+<%= link_to "Yes!", new_question_answer(question_id: @question.id), method: :get %>
+
+<% end %>

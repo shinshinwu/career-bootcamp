@@ -1,20 +1,32 @@
 class QuestionsController < ApplicationController
 
   def index
-    @question = Question.new
-    @questions = Question.all
+    @questions = Question.order(created_at: :desc).limit(10)
+    @resources = Resource.order(created_at: :desc).limit(10)
   end
 
   def show
     @question = Question.find(params[:id])
-    @answers = @question.answers.paginate(page: params[:page])
-    @answer = Answer.new
+    @resources = @question.resources.order(created_at: :desc)
+    # if current user have submitted answers to the question, then will show the answers list to the question
+    @user = current_user
+    @answers = @question.answers.order(created_at: :desc)
   end
 
+  def new
+    @question = Question.new
+  end
+
+  # after user created a new question, they won't be directed to submit new answer. When user click yes to add resource, it will append new input box on page to input resources
   def create
     @question = Question.new(question_params)
-    if @question.save
-      redirect_to @question
+    if @question.save && params[:resource] == 'yes' && params[:answer] == 'yes'
+      # need to make some sort of mark that the user will submit both resources and answers
+      redirect_to new_question_resource_path(@question.id, :both => params[:resource])
+    elsif @question.save && params[:resource] == 'yes' && params[:answer] != 'yes'
+      redirect_to new_question_resource_path(@question.id)
+    elsif @question.save && params[:resource] != 'yes' && params[:answer] == 'yes'
+      redirect_to new_question_answer_path(@question.id)
     else
       p "question failed to save"
     end
@@ -51,7 +63,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:job_title, :interview_type, :title, :content)
+    params.require(:question).permit(:topic_id, :user_id, :job_title, :interview_type, :title, :content)
   end
 
 end
