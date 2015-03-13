@@ -47,7 +47,7 @@ MasterController.prototype = {
   },
   startPlayback: function(btn){
     document.getElementById("timer").classList.add('playback-text');
-    console.log(btn.classList)
+    // console.log(btn.classList);
     btn.classList.add('play-active');
     btn.classList.remove('play-inactive');
 
@@ -63,7 +63,7 @@ MasterController.prototype = {
         timer = null;
         console.log("done with playback");
       }
-    }.bind(this), 1000)
+    }.bind(this), 1000);
   },
   startRecordingTimer: function(){
     this.recordingTimer = setInterval(function(){
@@ -79,7 +79,7 @@ MasterController.prototype = {
 
         return console.log("done");
       }
-    }.bind(this), 1000)
+    }.bind(this), 1000);
   },
   startRecording: function(btn, title){
     btn.classList.add('record-active');
@@ -89,6 +89,7 @@ MasterController.prototype = {
     title.classList.remove("hide");
 
     // this.audioController.recordButtonEvent(btn);
+    this.audioController.startRecording();
     this.formController.formEnable();
     this.startRecordingTimer();
   },
@@ -103,6 +104,7 @@ MasterController.prototype = {
     btn.classList.add('record-paused');
     this.pauseRecordingTimer();
     this.formController.formDisable();
+    this.audioController.stopRecording();
   }
 };
 
