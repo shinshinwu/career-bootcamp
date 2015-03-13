@@ -12,16 +12,9 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
 
-  # def password
-  #   @password ||= Password.new(password_hash)
-  # end
 
-  # def password=(new_password)
-  #   @password = Password.create(new_password)
-  #   self.password_hash = @password
-  # end
+  def submitted_answer?(question_id)
+    !self.answers.find_by(question_id: question_id).nil?
+  end
 
-  # def self.authenticate(params)
-  #   user = User.find_by(email: params[:email])
-  #   (user && user.password == params[:password]) ? user : nil
-  # end
+end

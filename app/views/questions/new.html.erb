@@ -1,0 +1,22 @@
+<h1>New Interview Question Details</h1>
+
+<%= form_for(@question) do |f| %>
+
+  <%= f.label :job_title, 'Category (e.g. Front End Developer)' %>
+  <%= f.text_field :job_title %>
+
+  <%= f.label :title, 'Question Title' %>
+  <%= f.text_field :title, placeholder: 'Explain what HTTP is' %>
+
+  <%= f.label :content, 'Question Details' %>
+  <%= f.text_field :content, placeholder: 'Write any question related details here' %>
+
+  <%= f.label :resource, 'Have a resource to submit?' %>
+  <%= f.radio_button :resource, :value => 'yes' %>
+
+  <%= f.label :answer, 'Have an answer to submit?' %>
+  <%= f.radio_button :answer, :value => 'yes' %>
+
+  <%= f.submit "Next" %>
+
+<% end %>
