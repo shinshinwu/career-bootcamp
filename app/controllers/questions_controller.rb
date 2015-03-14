@@ -19,14 +19,15 @@ class QuestionsController < ApplicationController
 
   # after user created a new question, they won't be directed to submit new answer. When user click yes to add resource, it will append new input box on page to input resources
   def create
-    @question = Question.new(question_params)
-    if @question.save && params[:resource] == 'yes' && params[:answer] == 'yes'
-      # need to make some sort of mark that the user will submit both resources and answers
-      redirect_to new_question_resource_path(@question.id, :both => params[:resource])
-    elsif @question.save && params[:resource] == 'yes' && params[:answer] != 'yes'
+    @user = current_user
+    if Topic.exists?(topic_name: question_params[:topic])
+      @topic = Topic.find_by(topic_name: question_params[:topic])
+    else
+      @topic = Topic.create(topic_name: question_params[:topic])
+    end
+    @question = Question.new(topic_id: @topic.id, user_id: @user.id, job_title: question_params[:job_title], interview_type: question_params[:interview_type], title: question_params[:title], content: question_params[:content])
+    if @question.save
       redirect_to new_question_resource_path(@question.id)
-    elsif @question.save && params[:resource] != 'yes' && params[:answer] == 'yes'
-      redirect_to new_question_answer_path(@question.id)
     else
       p "question failed to save"
     end
@@ -63,7 +64,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:topic_id, :user_id, :job_title, :interview_type, :title, :content)
+    params.require(:question).permit(:topic, :user_id, :job_title, :interview_type, :title, :content)
   end
 
 end

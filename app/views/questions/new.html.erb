@@ -5,18 +5,23 @@
   <%= f.label :job_title, 'Category (e.g. Front End Developer)' %>
   <%= f.text_field :job_title %>
 
+  <%= f.label :topic, 'Question topic' %>
+  <%= f.text_field :topic, placeholder: 'jQuery, CSS etc' %>
+
   <%= f.label :title, 'Question Title' %>
   <%= f.text_field :title, placeholder: 'Explain what HTTP is' %>
 
   <%= f.label :content, 'Question Details' %>
-  <%= f.text_field :content, placeholder: 'Write any question related details here' %>
+  <%= f.text_area :content, placeholder: 'Write any question related details here' %>
 
-  <%= f.label :resource, 'Have a resource to submit?' %>
-  <%= f.radio_button :resource, :value => 'yes' %>
+  <%= f.label :interview_type, 'Interview Format' %>
+  <%= f.radio_button :interview_type, 'Onsite/In person' %>
+  <%= f.label :interview_type, 'Onsite/In person', :value => 'Onsite' %>
+  <%= f.radio_button :interview_type, 'Over the Phone' %>
+  <%= f.label :interview_type, 'Phone', :value => 'Phone' %>
+  <%= f.radio_button :interview_type, 'Email/Online Challenge' %>
+  <%= f.label :interview_type, 'Email/Online Challenge', :value => 'Email/Online Challenge' %>
 
-  <%= f.label :answer, 'Have an answer to submit?' %>
-  <%= f.radio_button :answer, :value => 'yes' %>
-
-  <%= f.submit "Next" %>
+  <%= f.submit "Submit" %>
 
 <% end %>

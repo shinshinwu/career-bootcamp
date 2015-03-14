@@ -1,16 +1,30 @@
 <h1>Adding New Resource</h1>
 
-<%= form_for(@resource) do |f| %>
+<h3>Do you have any useful resources that you would like to submit to help fellow job hunters to review topics related to the question you have just submitted?</h2>
 
-  <%= f.lable :title, 'A concise title for your resource' %>
+<button id="yes-resource">Yes of course!</button>
+<br>
+<%= link_to "Not right now, but let me see my newly posted question!", @question %>
+<br><br>
+<div id="resource-form">
+<%= form_for @resource, url: {action: "create"} do |f| %>
+
+  <%= f.label :title, 'A concise title for your resource' %>
   <%= f.text_field :title %>
 
-  <%= f.lable :link, 'Link to external resource' %>
+  <%= f.label :link, 'Link to external resource' %>
   <%= f.text_field :link %>
 
-  <%= f.lable :content, 'Add some details about your resource' %>
-  <%= f.text_field :content %>
+  <%= f.label :content, 'Add some details about your resource' %>
+  <%= f.text_area :content %>
 
   <%= f.submit "Submit" %>
 
 <% end %>
+</div>
+
+<script>
+  $("#yes-resource").click(function(e){
+    $("#resource-form").css("visibility", "visible")
+  })
+</script>

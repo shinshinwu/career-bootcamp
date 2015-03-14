@@ -1,6 +1,7 @@
 class ResourcesController < ApplicationController
 
   def new
+    @question = Question.find(params[:question_id])
     @resource = Resource.new
   end
 

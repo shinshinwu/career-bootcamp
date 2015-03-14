@@ -29,6 +29,6 @@
 
 <h2>Ready to Submit Your Answer?</h2>
 
-<%= link_to "Yes!", new_question_answer(question_id: @question.id), method: :get %>
+<%= link_to "Yes!", new_question_answer_path(question_id: @question.id), method: :get %>
 
 <% end %>
