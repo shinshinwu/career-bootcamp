@@ -2,10 +2,10 @@
 
 <!-- need to figure out some way to show different type of answer form depends on the interview question type such as phone or in person etc -->
 
-<%= form_for(@answer) do |f| %>
+<%= form_for @answer, url: {action: "create"} do |f| %>
 
 
-  <%= f.lable :content, 'Your Answer' %>
+  <%= f.label :content, 'Your Answer' %>
   <%= f.text_field :content %>
 
   <%= f.submit "Submit" %>
