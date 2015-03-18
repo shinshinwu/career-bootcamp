@@ -11,7 +11,7 @@
 <h2>User submitted Resources</h2>
 <ul>
 <% @resources.each do |resource| %>
-  <li>Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>)  <a href="<%= resource.link %>"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %></li>
+  <li>Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>)  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %></li>
 <% end %>
 </ul>
 
@@ -20,7 +20,7 @@
 <h2>User submitted Answers</h2>
 <ul>
 <% @answers.each do |answer| %>
-  <li>Votes: <%= answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>)  <%= link_to "View Answer", question_answer_path(question_id: @question.id, answer_id: answer.id), method: :get %></li>
+  <li>Votes: <%= answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>)  <%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></li>
 <% end %>
 </ul>
 

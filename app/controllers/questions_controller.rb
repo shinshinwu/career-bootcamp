@@ -5,6 +5,23 @@ class QuestionsController < ApplicationController
     @resources = Resource.order(created_at: :desc).limit(10)
   end
 
+  def track
+    @track = params[:track].gsub(/\d/, ' ')
+    topic_ids = Question.where(job_title: @track).pluck(:topic_id).uniq
+    @topics = []
+    topic_ids.each {|id| @topics << Topic.find(id)}
+  end
+
+  def topic
+    @track = params[:track].gsub(/\d/, ' ')
+    # this repetitive part could be ajaxed and eliminated using another layout
+    topic_ids = Question.where(job_title: @track).pluck(:topic_id).uniq
+    @topics = []
+    topic_ids.each {|id| @topics << Topic.find(id)}
+    @topic = Topic.find(params[:topic])
+    @questions = @topic.questions.order(created_at: :desc)
+  end
+
   def show
     @question = Question.find(params[:id])
     @resources = @question.resources.order(created_at: :desc)
@@ -33,32 +50,16 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-    @question = Question.find(params[:id])
-  end
-
-  def update
-    @question = Question.find(params[:id])
-    if @question.update_attributes(question_params)
-      redirect_to @question
-    else
-      p "failed to update question"
-    end
-  end
-
   def upvote
     @question = Question.find(params[:id])
     @question.upvote
+    redirect_to :back
   end
 
   def downvote
     @question = Question.find(params[:id])
     @question.downvote
-  end
-
-  def destroy
-    Question.find(params[:id]).destroy
-    redirect_to 'index'
+    redirect_to :back
   end
 
   private

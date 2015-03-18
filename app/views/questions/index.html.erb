@@ -2,12 +2,12 @@
 
 <div class="tracks">
   <h2>Track 1</h2>
-  <a href="#"><h3>Front End Developer</h3></a>
+  <a href="/questions/tracks/Front0End0Developer"><h3>Front End Developer</h3></a>
 </div>
 
 <div class="tracks">
   <h2>Track 2</h2>
-  <a href="#"><h3>Ruby on Rails Engineer</h3></a>
+  <a href="/questions/tracks/Ruby0on0Rails0Engineer"><h3>Ruby on Rails Engineer</h3></a>
 </div>
 
 <h2>Latest Interview Questions Feed</h2>
@@ -23,7 +23,7 @@
 <ol>
   <% @resources.each do |resource| %>
   <li>
-    Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>) <a href="<%= resource.link %>"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %>
+    Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>) <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %>
   </li>
   <% end %>
 </ol>

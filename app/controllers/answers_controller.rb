@@ -24,11 +24,13 @@ class AnswersController < ApplicationController
   def upvote
     @answer = Answer.find(params[:answer_id])
     @answer.upvote
+    redirect_to :back
   end
 
   def downvote
     @answer = Answer.find(params[:answer_id])
     @answer.downvote
+    redirect_to :back
   end
 
   private

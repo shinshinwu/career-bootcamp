@@ -1,0 +1,16 @@
+<h1><%= @track %> Track</h1>
+
+<h3>Progress bar:</h3>
+<!-- should the progress bar lay out in certain order? -->
+<ul>
+  <% @topics.each do |topic| %>
+  <li><a href="/questions/tracks/<%= @track.gsub(/\s/, '0') %>/topics/<%= topic.id %>"><%= topic.topic_name %></a></li>
+  <% end %>
+</ul>
+
+<h3>Interview Questions Related to <%= @topic.topic_name %></h3>
+<ol>
+  <% @questions.each do |question| %>
+  <li>Votes: <%= question.votes %> (<%= link_to "Upvote", upvote_question_path(question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(question.id), method: :patch %>)   <a href="/questions/<%= question.id %>"><%= question.title %></a></li>
+  <% end %>
+</ol>

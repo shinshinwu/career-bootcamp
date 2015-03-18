@@ -1,0 +1,11 @@
+<h1><%= @track %> Track</h1>
+
+<h3>Progress bar:</h3>
+<!-- should the progress bar lay out in certain order? -->
+<ul>
+  <% @topics.each do |topic| %>
+  <li><a href="/questions/tracks/<%= @track.gsub(/\s/, '0') %>/topics/<%= topic.id %>"><%= topic.topic_name %></a></li>
+  <% end %>
+</ul>
+
+<h3>Please choose a topic above to start your learning progress!</h3>
