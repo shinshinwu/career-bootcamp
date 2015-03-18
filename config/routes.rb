@@ -6,22 +6,24 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'users#index'
-  resources :users
+  resources :users, only: [:show, :create]
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   get 'tracks' => 'questions#index'
-  resources :questions do
+  get 'questions/tracks/:track' => 'questions#track'
+  get 'questions/tracks/:track/topics/:topic' => 'questions#topic'
+  resources :questions, except: [:edit, :update, :create] do
     member do
       patch 'upvote', to: 'questions#upvote'
       patch 'downvote', to: 'questions#downvote'
     end
-    resources :answers do
+    resources :answers, only: [:new, :show, :create] do
       patch 'upvote', to: 'answers#upvote'
       patch 'downvote', to: 'answers#downvote'
     end
-    resources :resources do
+    resources :resources, only: [:new, :create] do
       patch 'upvote', to: 'resources#upvote'
       patch 'downvote', to: 'resources#downvote'
     end

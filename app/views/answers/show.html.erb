@@ -2,4 +2,5 @@
 
 <h2>Question: <a href="/questions/<%= @question.id %>"><%= @question.title %></a></h2>
 
+<h3>Votes: <%= @answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>)</h3>
 <h3>Answer: <%= @answer.content %></h3>

@@ -16,11 +16,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit
-    # update password/username form?
-    @user = User.find(params[:id])
-  end
-
   def create
     # create new user in database
     @user = User.new(user_params)
@@ -31,24 +26,6 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def update
-    # update password or username?
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    # delete user
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_url
   end
 
   private

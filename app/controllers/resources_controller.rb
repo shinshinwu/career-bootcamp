@@ -19,11 +19,13 @@ class ResourcesController < ApplicationController
   def upvote
     @resource = Resource.find(params[:resource_id])
     @resource.upvote
+    redirect_to :back
   end
 
   def downvote
     @resource = Resource.find(params[:resource_id])
     @resource.downvote
+    redirect_to :back
   end
 
   private
