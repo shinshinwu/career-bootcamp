@@ -1,16 +1,23 @@
-<h1>Log in</h1>
 
-<div class="row">
-  <%= form_for(:session, url: login_path) do |f| %>
+<div class="content">
 
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
+    <div class="pure-g">
+        <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+          <%= form_for(:session, url: login_path, html: {class: "pure-form pure-form-stacked"}) do |f| %>
+            <fieldset>
+            <legend>Log In</legend>
 
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
+            <%= f.label :email %>
+            <%= f.email_field :email %>
 
-    <%= f.submit "Log in", class: "btn btn-primary" %>
-  <% end %>
+            <%= f.label :password %>
+            <%= f.password_field :password %>
 
-  <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+            <%= f.submit "Log In", :class => 'pure-button' %>
+            <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+            </fieldset>
+          <% end %>
+      </div>
+    </div>
+
 </div>
