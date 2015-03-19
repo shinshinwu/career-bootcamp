@@ -292,6 +292,48 @@ a.pure-button-primary {
 }
 
 /*
+---- Custom styles---
+*/
+
+ul {
+    list-style: none;
+}
+
+.list li {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    border-bottom: 1px solid #eee;
+}
+
+.list li:first-child {
+    border-top: 1px solid #eee;
+}
+
+.votes {
+    float: left;
+    margin-right: 10px;
+}
+
+.tags {
+    padding: 0.5em;
+}
+
+.tags .label {
+    padding: 0.3em;
+    background-color: #DAE6EF;
+}
+
+.tags .label:first-child {
+    margin-left: 4em;
+}
+
+.pure-g {
+    display: block;
+    margin: 0 auto;
+    padding-left: 5em;
+}
+
+/*
  * -- DESKTOP (AND UP) MEDIA QUERIES --
  * On desktops and other large devices, we want to over-ride some
  * of the mobile and tablet styles.

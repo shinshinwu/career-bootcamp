@@ -2,12 +2,23 @@
   <h2 class="content-head is-center"><%= @user.username %>'s profile page</h2>
 
   <div class="pure-g">
-    <div class="pure-u-1">
+    <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Questions Submitted by You</h3>
-        <ul>
+        <ul class="list">
           <% @user.questions.each do |question| %>
-          <li>Votes: <%= question.votes %>  <a href="/questions/<%= question.id %>"><%= question.title %></a> <i class="fa fa-caret-right"></i> Category: <%= question.job_title %> <i class="fa fa-caret-right"></i> Interview Type: <%= question.interview_type %> <i class="fa fa-caret-right"></i> Topic: <%= question.topic.topic_name %></li>
+          <li>
+            <div class="votes">Votes: <%= question.votes %>
+            </div>
+            <div class="summary">
+              <a href="/questions/<%= question.id %>"><%= question.title %></a>
+            </div>
+            <div class="tags">
+              <span class="label">Category: <%= question.job_title %></span>
+              <span class="label">Interview Type: <%= question.interview_type %></span>
+              <span class="label">Topic: <%= question.topic.topic_name %><span class="lable">
+            </div>
+          </li>
           <% end %>
         </ul>
       </div>
@@ -15,12 +26,17 @@
   </div>
 
   <div class="pure-g">
-    <div class="pure-u-1">
+    <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Answers Submitted by You</h3>
-        <ul>
+        <ul class="list">
           <% @user.answers.each do |answer| %>
-          <li>Votes: <%= answer.votes %>  <a href="/questions/<%= answer.question.id %>"><%= answer.content %></a></li>
+          <li>
+            <div class="votes">Votes: <%= answer.votes %></div>
+            <div class="summary">
+              <a href="/questions/<%= answer.question.id %>"><%= answer.content %></a>
+            </div>
+          </li>
           <% end %>
         </ul>
       </div>
@@ -29,12 +45,20 @@
 
 
   <div class="pure-g">
-    <div class="pure-u-1">
+    <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Resources Submitted by You</h3>
-        <ul>
+        <ul class="list">
           <% @user.resources.each do |resource| %>
-          <li>Votes: <%= resource.votes %>  <a href="<%= resource.link %>"><%= resource.title %></a>  <i class="fa fa-caret-right"></i> Content: <%= resource.content %></li>
+          <li>
+            <div class="votes">Votes: <%= resource.votes %></div>
+            <div class="summary">
+              <a href="<%= resource.link %>"><%= resource.title %></a>
+            </div>
+            <div class="tags">
+              <span class="label">Content: <%= resource.content %></span>
+            </div>
+          </li>
           <% end %>
         </ul>
       </div>
