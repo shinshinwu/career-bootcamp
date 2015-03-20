@@ -130,13 +130,10 @@ $(document).ready(function(){
           xhr = new XMLHttpRequest(),
           time = new Date(),
           csrfToken = document.querySelector("meta[name='csrf-token']").content,
-          fileName = "u" + form.getAttribute("data-user-id") + "q" + form.getAttribute("data-user-id") + "_" + time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDay() + "[" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "].ogg";
-
-        console.log(this.audioController.finalAudio);
+          fileName = "u" + form.getAttribute("data-user-id") + "q" + form.getAttribute("data-user-id") + "_" + time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDay() + "(" + time.getHours() + "." + time.getMinutes() + "." + time.getSeconds() + ").ogg";
 
         formData.append("audio_file", this.audioController.finalAudio, fileName);
 
-        console.log(formData);
         xhr.open("POST", action, true);
         xhr.setRequestHeader("X-CSRF-Token", csrfToken);
 
