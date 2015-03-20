@@ -4,7 +4,7 @@ var FormController = function(){
   this.formCaptures = {};
   this.formCaptures[0] = "";
   this.codearea = document.getElementById("code-area");
-}
+};
 
 FormController.prototype = {
   formCapture: function(time) {
@@ -30,7 +30,7 @@ FormController.prototype = {
   },
   formEvent: function(time) {
     if (this.formPending == false){
-      this.formCapture(time);  
+      this.formCapture(time);
     }
   },
   formPlayback: function(time){

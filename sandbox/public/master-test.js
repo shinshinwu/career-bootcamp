@@ -47,9 +47,11 @@ MasterController.prototype = {
   },
   startPlayback: function(btn){
     document.getElementById("timer").classList.add('playback-text');
+    var audio = document.querySelector('audio');
     // console.log(btn.classList);
     btn.classList.add('play-active');
     btn.classList.remove('play-inactive');
+    audio.play();
 
     if (btn.classList.contains("firstplay")){
       this.formController.formPlayback(0);
@@ -72,7 +74,7 @@ MasterController.prototype = {
         clearInterval(this.recordingTimer);
         this.formController.formDisable();
         // this.audioController.stopRecording();
-        // this.formController.stopRecording();
+        this.audioController.stopRecording();
         this.recordingTimer = null;
         document.getElementById("play-btn").classList.remove('hide');
         document.getElementById("record-btn").classList.add('hide');
@@ -94,6 +96,8 @@ MasterController.prototype = {
     this.startRecordingTimer();
   },
   pausePlayback: function(btn){
+    var audio = document.querySelector('audio');
+    audio.pause();
     btn.classList.remove('play-active');
     btn.classList.add('play-paused');
     this.pausePlaybackTimer();
@@ -104,8 +108,8 @@ MasterController.prototype = {
     btn.classList.add('record-paused');
     this.pauseRecordingTimer();
     this.formController.formDisable();
-    this.audioController.stopRecording();
+    this.audioController.pauseRecording();
   }
 };
 
-masterController = new MasterController(5);
+masterController = new MasterController(20);
