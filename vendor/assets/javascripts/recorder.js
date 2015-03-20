@@ -15,7 +15,7 @@ var Recorder = function( config ){
   config.numberOfChannels = config.numberOfChannels || 1;
   config.recordOpus = (config.recordOpus === false) ? false : true;
   config.sampleRate = config.sampleRate || this.audioContext.sampleRate;
-  config.workerPath = config.workerPath || '/lib/recorderWorker.js';
+  config.workerPath = config.workerPath || "/lib/recorderWorker.js";
   config.onReady = config.onReady || function(){};
   this.config = config;
 

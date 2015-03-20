@@ -4,6 +4,16 @@
     <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 
 <!-- need to figure out some way to show different type of answer form depends on the interview question type such as phone or in person etc -->
+  <h1 id="timer">&nbsp;</h1>
+  <h2 id="question" class="hide">Describe how GitHub optimizes your workflow</h2>
+    <button id="record-btn" class="record record-inactive"></button>
+    <div id="play-btn" class="play play-inactive hide firstplay"></div>
+    <audio controls id="audio" type="audio/ogg">Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
+
+    <textarea id="code-area" class="code-area code-disabled" disabled>
+      
+    </textarea>
+
 
       <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked"} do |f| %>
 
