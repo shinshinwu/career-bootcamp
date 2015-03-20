@@ -8,6 +8,7 @@ $(document).ready(function(){
     this.playButtonListener();
     this.recordButtonListener();
     this.formListener();
+    this.submitListener();
     this.timerController.updateTimer(maxTime);
   };
 
@@ -39,7 +40,7 @@ $(document).ready(function(){
       clearInterval(this.recordingTimer);
     },
     playButtonListener: function(){
-      var btn = document.getElementById("play-btn") 
+      var btn = document.getElementById("play-btn");
     
       btn.addEventListener('click', function(){
         if (btn.classList.contains("play-active")){
@@ -52,8 +53,8 @@ $(document).ready(function(){
       }.bind(this));
     },
     recordButtonListener: function(){
-      var btn = document.getElementById("record-btn");
-      var title = document.getElementById("question");
+      var btn = document.getElementById("record-btn"),
+        title = document.getElementById("question");
       btn.addEventListener('click', function(){
         if (btn.classList.contains("record-active")){
           this.pauseRecording(btn, title);
@@ -63,8 +64,8 @@ $(document).ready(function(){
       }.bind(this));
     },
     startPlayback: function(btn){
-      document.getElementById("timer").classList.add('playback-text');
       var audio = document.querySelector('audio');
+      document.getElementById("timer").classList.add('playback-text');
       // console.log(btn.classList);
       btn.classList.add('play-active');
       btn.classList.remove('play-inactive');
@@ -108,16 +109,49 @@ $(document).ready(function(){
       playbackTimer = null;
     },
     stopRecording: function(recordingTimer){
-      var audio = document.querySelector('audio');
-      var fileInput = document.getElementById("file-input");
+      var audio = document.querySelector('audio'),
+        submitBtn = document.getElementById("submitBtn");
       clearInterval(recordingTimer);
       recordingTimer = null;
       console.log("done with recording");
       this.formController.formDisable();
-      this.audioController.stopRecording(audio, fileInput);
+      this.audioController.stopRecording(audio, submitBtn);
       document.getElementById("play-btn").classList.remove('hide');
       document.getElementById("record-btn").classList.add('hide');
       document.getElementById("code-array").value = JSON.stringify(this.formController.formCaptures);
+    },
+    submitListener: function(){
+      var form = document.getElementById("new_answer");
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        var formData = new FormData(form),
+          action = form.action,
+          xhr = new XMLHttpRequest(),
+          time = new Date(),
+          csrfToken = document.querySelector("meta[name='csrf-token']").content,
+          fileName = "u" + form.getAttribute("data-user-id") + "q" + form.getAttribute("data-user-id") + "_" + time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDay() + "[" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "].ogg";
+
+        console.log(this.audioController.finalAudio);
+
+        formData.append("audio_file", this.audioController.finalAudio, fileName);
+
+        console.log(formData);
+        xhr.open("POST", action, true);
+        xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+
+        xhr.send(formData);
+
+        xhr.onload = function () {
+          if (xhr.status === 200){
+            console.log("success");
+            console.log(xhr.statusText);
+            console.log(xhr.responseText);
+          } else {
+            console.log("error");
+          }
+        };
+      }.bind(this));
     }
   };
 

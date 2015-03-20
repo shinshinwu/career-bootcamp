@@ -6,14 +6,19 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @question = Question.find(params[:question_id])
-    @user = current_user
-    @answer = Answer.new(question_id: @question.id, user_id: @user.id, content: answer_params[:content])
-    if @answer.save
+    p params[:question_id]
+    p " "
+    p params[:answer][:content]
+    p " "
+    p params[:audio_file]
+    # @question = Question.find(params[:question_id])
+    # @user = current_user
+    # @answer = Answer.new(question_id: @question.id, user_id: @user.id, content: answer_params[:content])
+    # if @answer.save
       redirect_to @question
-    else
-      p 'something wrong with saving answer'
-    end
+    # else
+    #   p 'something wrong with saving answer'
+    # end
   end
 
   def show

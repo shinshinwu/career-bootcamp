@@ -12,18 +12,10 @@
 
     <textarea id="code-area" class="pure-input-1 code-area code-disabled" disabled></textarea>
 
-    <!-- <input type="hidden" id="code-array"> -->
-    <!-- <input type="file" id="audio-file"> -->
-
-      <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked"} do |f| %>
-
+      <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked", "data-user-id" => @question.user.id, "data-question-id" => @question.id} do |f| %>
         <fieldset>
-        <!-- <legend>Submit Your Answer</legend> -->
         <%= f.hidden_field :content, :id => "code-array" %>
-        <%= f.file_field :file, :id => "file-input" %>
-        <%= f.text_area :content, :rows => 10, :class => "pure-input-1", placeholder: 'The answer should be alpha because of beta...' %>
-        <br>
-        <%= f.submit "Submit", :class => 'pure-button' %>
+        <%= f.submit "Submit", :class => 'pure-button', :id => "submitBtn", :disabled => true %>
         </fieldset>
       <% end %>
     </div>
