@@ -8,19 +8,14 @@ class AnswersController < ApplicationController
 
   def create
     AnswersHelper.aws_upload(params[:audio_file])
-    p params[:question_id]
-    p " "
-    p params[:answer][:content]
-    p " "
-    p params[:audio_file].tempfile
-    # @question = Question.find(params[:question_id])
-    # @user = current_user
-    # @answer = Answer.new(question_id: @question.id, user_id: @user.id, content: answer_params[:content])
-    # if @answer.save
-      redirect_to @question
-    # else
-    #   p 'something wrong with saving answer'
-    # end
+    @question = Question.find(params[:question_id])
+    @answer = Answer.new(question: @question, user_id: current_user.id, content: answer_params[:content], s3_audio_key: params[:audio_file].original_filename, external_solution_link: answer_params[:external_solution_link])
+    if @answer.save
+      p @answer.id
+      redirect_to @answer
+    else
+      p 'something wrong with saving answer'
+    end
   end
 
   def show
@@ -43,6 +38,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, :external_solution_link)
   end
 end
