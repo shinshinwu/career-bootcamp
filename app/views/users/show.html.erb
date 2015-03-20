@@ -1,7 +1,7 @@
 <div class="content">
   <h2 class="content-head is-center"><%= @user.username %>'s profile page</h2>
 
-  <div class="pure-g">
+  <div class="pure-g user-profile">
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Questions Submitted by You</h3>
@@ -16,7 +16,7 @@
             <div class="tags">
               <span class="label">Category: <%= question.job_title %></span>
               <span class="label">Interview Type: <%= question.interview_type %></span>
-              <span class="label">Topic: <%= question.topic.topic_name %><span class="lable">
+              <span class="label">Topic: <%= question.topic.topic_name %></span>
             </div>
           </li>
           <% end %>
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="pure-g">
+  <div class="pure-g user-profile">
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Answers Submitted by You</h3>
@@ -44,7 +44,7 @@
   </div>
 
 
-  <div class="pure-g">
+  <div class="pure-g user-profile">
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Resources Submitted by You</h3>

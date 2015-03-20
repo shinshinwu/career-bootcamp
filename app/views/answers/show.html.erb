@@ -1,6 +1,20 @@
-<h1>Answer Details</h1>
+<div class="content">
 
-<h2>Question: <a href="/questions/<%= @question.id %>"><%= @question.title %></a></h2>
+  <div class="pure-g">
+    <div class="pure-u-5-6">
+      <div class="l-box">
+        <h3 class="content-subhead">Answer Details</h3>
+        <ul class="list">
 
-<h3>Votes: <%= @answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>)</h3>
-<h3>Answer: <%= @answer.content %></h3>
+          <li>
+            <div class="votes">Votes: <%= @answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>)</div>
+            <br>
+            <div class="summary">Question: <a href="/questions/<%= @question.id %>"><%= @question.title %></a></div>
+
+            <div class="summary">Answer Details: <%= @answer.content %></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

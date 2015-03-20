@@ -1,13 +1,20 @@
-<h1>Adding New Answer</h1>
+<div class="content">
+
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 
 <!-- need to figure out some way to show different type of answer form depends on the interview question type such as phone or in person etc -->
 
-<%= form_for @answer, url: {action: "create"} do |f| %>
+      <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked"} do |f| %>
 
-
-  <%= f.label :content, 'Your Answer' %>
-  <%= f.text_area :content %>
-
-  <%= f.submit "Submit" %>
-
-<% end %>
+        <fieldset>
+        <legend>Submit Your Answer</legend>
+        <%= f.label :content, 'Answer Details' %>
+        <%= f.text_area :content, :rows => 10, :class => "pure-input-1", placeholder: 'The answer should be alpha because of beta...' %>
+        <br>
+        <%= f.submit "Submit", :class => 'pure-button' %>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
     !self.answers.find_by(question_id: question_id).nil?
   end
 
+  def submitted_resource?(question_id)
+    !self.resources.find_by(question_id: question_id).nil?
+  end
+
 end

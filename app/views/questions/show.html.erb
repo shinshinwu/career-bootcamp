@@ -1,34 +1,72 @@
-<h1>Top Nav Bar Stuff</h1>
+<div class="content">
 
-<h2>Question: <%= @question.title %></h2>
-<ul>
-  <li>Votes: <%= @question.votes %> (<%= link_to "Upvote", upvote_question_path(@question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(@question.id), method: :patch %>)</li>
-  <li>Content: <%= @question.content %></li>
-  <li>Category: <%= @question.job_title %></li>
-  <li>Interview Type: <%= @question.interview_type %></li><li>Topic: <%= @question.topic.topic_name %></li>
-</ul>
+  <div class="pure-g">
+    <div class="pure-u-5-6">
+      <div class="l-box">
+        <h3 class="content-subhead">Question: <%= @question.title %></h3>
+        <ul class="list">
+          <li>
+            <div class="votes">Votes: <%= @question.votes %> (<%= link_to "Upvote", upvote_question_path(@question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(@question.id), method: :patch %>)</div>
+              <div class="summary">Content: <%= @question.content %></div>
+              <div class="tags">
+                <span class="label">Category: <%= @question.job_title %></span>
+                <span class="label">Interview Type: <%= @question.interview_type %></span>
+                <span class="label">Topic: <%= @question.topic.topic_name %></span>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<h2>User submitted Resources</h2>
-<ul>
-<% @resources.each do |resource| %>
-  <li>Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>)  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %></li>
-<% end %>
-</ul>
+  <div class="pure-g">
+    <div class="pure-u-5-6">
+      <div class="l-box">
+        <h3 class="content-subhead">User submitted Resources</h3>
+        <ul class="list">
+        <% @resources.each do |resource| %>
+          <li>Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>)  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<% if @user.submitted_answer?(@question.id) %>
+  <% unless @user.submitted_resource?(@question.id) %>
+  <div class="pure-g">
+    <div class="pure-u-5-6">
+      <div class="l-box">
+        <h3 class="content-subhead">Have a Resource to Submit?</h3>
 
-<h2>User submitted Answers</h2>
-<ul>
-<% @answers.each do |answer| %>
-  <li>Votes: <%= answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>)  <%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></li>
-<% end %>
-</ul>
+        <%= link_to "Yes!", new_question_resource_path(question_id: @question.id), method: :get, :class => 'pure-button pure-u-1-5' %>
+
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="pure-g">
+    <div class="pure-u-5-6">
+      <div class="l-box">
+  <% if @user.submitted_answer?(@question.id) %>
+
+        <h3 class="content-subhead">User submitted Answers</h3>
+        <ul class="list">
+        <% @answers.each do |answer| %>
+          <li>Votes: <%= answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>)  <%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></li>
+        <% end %>
+        </ul>
 
 
-<% else %>
+  <% else %>
 
-<h2>Ready to Submit Your Answer?</h2>
+      <h3 class="content-subhead">Ready to Submit Your Answer?</h3>
 
-<%= link_to "Yes!", new_question_answer_path(question_id: @question.id), method: :get %>
+      <%= link_to "Yes!", new_question_answer_path(question_id: @question.id), method: :get, :class => 'pure-button pure-u-1-5' %>
 
-<% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+</div>
