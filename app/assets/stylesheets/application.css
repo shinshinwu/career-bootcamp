@@ -14,11 +14,6 @@
  *= require_self
  */
 
-#resource-form,
-#resource-form::before {
-  visibility: hidden;
-}
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -151,9 +146,11 @@ a.pure-button-primary {
  * -- SPLASH STYLES --
  * This is the blue top section that appears on the page.
  */
+.landing-page {
+    background: #1f8dd6;
+}
 
 .splash-container {
-    background: #1f8dd6;
     z-index: 1;
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
@@ -330,9 +327,56 @@ ul {
 .pure-g {
     display: block;
     margin: 0 auto;
+}
+
+.user-profile {
     padding-left: 5em;
 }
 
+.tracks {
+    height: 40em;
+}
+
+.tracks .is-center {
+    position: relative;
+    top: 30%;
+}
+
+.tracks .is-center a {
+    text-decoration: none;
+}
+
+.tracks .is-center h2,
+.tracks .is-center h3 {
+    color: #f2f2f2;
+}
+
+.tracks.odd {
+    background-color: #EE6352;
+}
+
+.tracks.even {
+    background-color: #59CD90;
+}
+
+.tracks-title {
+    /* absolute center .splash within .splash-container */
+    margin: auto;
+    position: absolute;
+    top: 150px; left: 0; bottom: 0; right: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.pure-menu-list.topics li.active,
+.pure-menu-list.topics a.active {
+    background-color: #eee;
+}
+
+.new-question {
+    display: block;
+    margin: 0 auto;
+}
 /*
  * -- DESKTOP (AND UP) MEDIA QUERIES --
  * On desktops and other large devices, we want to over-ride some

@@ -1,60 +1,74 @@
 <div class="content">
   <h2 class="content-head is-center">Please pick one of your career track below</h2>
+</div>
 
-  <div class="tracks">
-    <h2>Track 1</h2>
-    <a href="/questions/tracks/Front0End0Developer"><h3>Front End Developer</h3></a>
-  </div>
+  <div class="pure-g splash-container">
+    <div class="tracks-title">
+      <a href="/questions/tracks/Front0End0Developer">
+        <div class="pure-u-1-2 tracks odd">
+          <div class="is-center">
+            <h2>Track 1</h2>
+            <h3>Front End Developer</h3>
+          </div>
+        </div>
+      </a>
 
-  <div class="tracks">
-    <h2>Track 2</h2>
-    <a href="/questions/tracks/Ruby0on0Rails0Engineer"><h3>Ruby on Rails Engineer</h3></a>
-  </div>
-
-  <div class="pure-g">
-    <div class="pure-u-5-6">
-      <div class="l-box">
-        <h3 class="content-subhead">Latest Interview Questions Feed</h3>
-        <ul class="list">
-          <% @questions.each do |question| %>
-          <li>
-            <div class="votes">Votes: <%= question.votes %> (<%= link_to "Upvote", upvote_question_path(question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(question.id), method: :patch %>)</div>
-            <div class="summary">
-              <a href="/questions/<%= question.id %>"><%= question.title %></a>
-            </div>
-            <div class="tags">
-              <span class="label">Category: <%= question.job_title %></span>
-              <span class="label">Interview Type: <%= question.interview_type %></span>
-              <span class="label">Topic: <%= question.topic.topic_name %></span>
-            </div>
-          </li>
-          <% end %>
-        </ul>
-      </div>
+      <a href="/questions/tracks/Ruby0on0Rails0Engineer">
+        <div class="pure-u-1-2 tracks even">
+          <div class="is-center">
+            <h2>Track 2</h2>
+            <h3>Ruby on Rails Engineer</h3>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 
-  <div class="pure-g">
-    <div class="pure-u-5-6">
-      <div class="l-box">
-        <h3 class="content-subhead">Latest Resources Feed</h3>
-        <ul class="list">
-          <% @resources.each do |resource| %>
-          <li>
-            <div class="votes">Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>)</div>
+<div class="content-wrapper">
+  <div class="content">
+  <%= link_to "Submit a New Interview Question", new_question_path, method: :get, :class => 'pure-button new-question pure-u-2-5' %>
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="l-box">
+          <h3 class="content-subhead is-center">Latest Interview Questions Feed</h3>
+          <ul class="list">
+            <% @questions.each do |question| %>
+            <li>
+              <div class="votes">Votes: <%= question.votes %> (<%= link_to "Upvote", upvote_question_path(question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(question.id), method: :patch %>)</div>
               <div class="summary">
-                <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                <a href="/questions/<%= question.id %>"><%= question.title %></a>
               </div>
               <div class="tags">
-                <span class="label">Topic: <%= resource.question.topic.topic_name %>
-                </span>
+                <span class="label">Category: <%= question.job_title %></span>
+                <span class="label">Interview Type: <%= question.interview_type %></span>
+                <span class="label">Topic: <%= question.topic.topic_name %></span>
               </div>
-          </li>
-          <% end %>
-        </ul>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div class="l-box">
+          <h3 class="content-subhead is-center">Latest Resources Feed</h3>
+          <ul class="list">
+            <% @resources.each do |resource| %>
+            <li>
+              <div class="votes">Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: resource.question.id, resource_id: resource.id), method: :patch %>)</div>
+                <div class="summary">
+                  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                </div>
+                <div class="tags">
+                  <span class="label">Topic: <%= resource.question.topic.topic_name %>
+                  </span>
+                </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 
-  <%= link_to "Submit a New Interview Question", new_question_path, method: :get %>
+  </div>
 </div>

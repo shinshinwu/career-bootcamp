@@ -1,27 +1,29 @@
-<h1>New Interview Question Details</h1>
+<div class="content">
 
-<%= form_for(@question) do |f| %>
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 
-  <%= f.label :job_title, 'Category (e.g. Front End Developer)' %>
-  <%= f.text_field :job_title %>
+      <%= form_for @question, html: {class: "pure-form pure-form-stacked"} do |f| %>
+        <fieldset>
+        <legend>New Interview Question Details</legend>
+        <%= f.label :job_title, 'Category (e.g. Front End Developer)' %>
+        <%= f.text_field :job_title %>
 
-  <%= f.label :topic, 'Question topic' %>
-  <%= f.text_field :topic, placeholder: 'jQuery, CSS etc' %>
+        <%= f.label :topic, 'Question topic' %>
+        <%= f.text_field :topic, placeholder: 'jQuery, CSS etc' %>
 
-  <%= f.label :title, 'Question Title' %>
-  <%= f.text_field :title, placeholder: 'Explain what HTTP is' %>
+        <%= f.label :title, 'Question Title' %>
+        <%= f.text_field :title, placeholder: 'Explain what HTTP is' %>
 
-  <%= f.label :content, 'Question Details' %>
-  <%= f.text_area :content, placeholder: 'Write any question related details here' %>
+        <%= f.label :content, 'Question Details' %>
+        <%= f.text_area :content, placeholder: 'Write any question related details here', :rows => 10, :class => "pure-input-1" %>
 
-  <%= f.label :interview_type, 'Interview Format' %>
-  <%= f.radio_button :interview_type, 'Onsite/In person' %>
-  <%= f.label :interview_type, 'Onsite/In person', :value => 'Onsite' %>
-  <%= f.radio_button :interview_type, 'Over the Phone' %>
-  <%= f.label :interview_type, 'Phone', :value => 'Phone' %>
-  <%= f.radio_button :interview_type, 'Email/Online Challenge' %>
-  <%= f.label :interview_type, 'Email/Online Challenge', :value => 'Email/Online Challenge' %>
-
-  <%= f.submit "Submit" %>
-
-<% end %>
+        <%= f.label :interview_type, 'Interview Format' %>
+        <%= select_tag(:interview_type, options_for_select([['Onsite', 'Onsite'], ['Phone', 'Phone'], ['Email/Online Challenge', 'Email/Online Challenge']])) %>
+        <br>
+        <%= f.submit "Submit", :class => 'pure-button' %>
+      </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>
