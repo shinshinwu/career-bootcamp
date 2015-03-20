@@ -34,5 +34,3 @@ module CareerBootcamp
   end
 end
 CREDENTIALS = Aws::Credentials.new(ENV["AWSAccessKeyId"], ENV["AWSSecretKey"])
-
-p CREDENTIALS
