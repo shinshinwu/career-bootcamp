@@ -45,14 +45,15 @@ AudioController.prototype = {
   startRecording: function (){
     this.recording.startRecording();
   },
-  stopRecording: function (){
-    var audio = document.querySelector('audio');
+  stopRecording: function (audio, fileInput){
     this.recording.doneRecording();
     this.recording.getOgg(function(audioBlob){
       this.finalAudio = audioBlob;
       console.log(audioBlob);
-      audio.src = window.URL.createObjectURL(audioBlob);
-      // Recorder.forceDownload(audioBlob);
+      var url = window.URL.createObjectURL(audioBlob);
+      console.log(url)
+      audio.src = url;
+      fileInput.value = url;
     });
   }
 };

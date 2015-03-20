@@ -1,7 +1,7 @@
 var FormController = function(){
   this.formEvent();
   this.formPending = false;
-  this.formCaptures = {};
+  this.formCaptures = [];
   this.formCaptures[0] = "";
   this.codearea = document.getElementById("code-area");
 };
@@ -38,6 +38,6 @@ FormController.prototype = {
       this.codearea.value = this.formCaptures[time];
     }
   }
-}
+};
 
 // formController = new FormController();
