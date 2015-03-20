@@ -22,6 +22,6 @@ User.all.each do |user|
 end
 
 Question.all.each do |question|
-  Answer.create(question_id: question.id, user_id: rand(1..20), content: Faker::Hacker.say_something_smart)
+  Answer.create(question_id: question.id, user_id: rand(1..20), content: [Faker::Hacker.say_something_smart, Faker::Hacker.say_something_smart])
   Resource.create(question_id: question.id, user_id: rand(1..20), title: Faker::Lorem.word, link: Faker::Internet.url, content: Faker::Lorem.sentence)
 end
