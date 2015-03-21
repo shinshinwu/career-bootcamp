@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
 
-
   def submitted_answer?(question_id)
     !self.answers.find_by(question_id: question_id).nil?
   end

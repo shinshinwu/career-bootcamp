@@ -19,15 +19,22 @@
         <ul class="list">
           <% @questions.each do |question| %>
           <li>
-            <div class="votes">Votes: <%= question.votes %> (<%= link_to "Upvote", upvote_question_path(question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(question.id), method: :patch %>)
+            <div class="voting">
+                  <a href="/questions/<%= question.id %>/upvote" class="fa fa-plus-circle"></a>
+                  <br>
+                  <a href="/questions/<%= question.id %>/downvote" class="fa fa-minus-circle"></a>
             </div>
-            <div class="summary">
-              <a href="/questions/<%= question.id %>"><%= question.title %></a>
-            </div>
-            <div class="tags">
-              <span class="label">Category: <%= question.job_title %></span>
-              <span class="label">Interview Type: <%= question.interview_type %></span>
-              <span class="label">Topic: <%= question.topic.topic_name %></span>
+            <div class="pure-u-5-6">
+              <div class="votes">Votes: <%= question.votes %></div>
+              <div class="summary">
+                <a href="/questions/<%= question.id %>"><%= question.title %></a>
+              </div>
+              <div class="tags">
+                <span class="label">Category: <%= question.job_title %></span>
+                <span class="label">Interview Type: <%= question.interview_type %></span>
+                <span class="label">Topic: <%= question.topic.topic_name %></span>
+                <span class="author">Posted By: <%= question.user.username %> on <%= question.created_at.strftime('%a %d %b %Y') %></span>
+               </div>
              </div>
           </li>
           <% end %>

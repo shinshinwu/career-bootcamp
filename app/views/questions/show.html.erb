@@ -6,13 +6,21 @@
         <h3 class="content-subhead">Question: <%= @question.title %></h3>
         <ul class="list">
           <li>
-            <div class="votes">Votes: <%= @question.votes %> (<%= link_to "Upvote", upvote_question_path(@question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(@question.id), method: :patch %>)</div>
-              <div class="summary">Content: <%= @question.content %></div>
-              <div class="tags">
-                <span class="label">Category: <%= @question.job_title %></span>
-                <span class="label">Interview Type: <%= @question.interview_type %></span>
-                <span class="label">Topic: <%= @question.topic.topic_name %></span>
+            <div class="voting">
+                  <a href="/questions/<%= @question.id %>/upvote" class="fa fa-plus-circle"></a>
+                  <br>
+                  <a href="/questions/<%= @question.id %>/downvote" class="fa fa-minus-circle"></a>
               </div>
+              <div class="pure-u-5-6">
+                <div class="votes">Votes: <%= @question.votes %></div>
+                  <div class="summary">Content: <%= @question.content %></div>
+                  <div class="tags">
+                    <span class="label">Category: <%= @question.job_title %></span>
+                    <span class="label">Interview Type: <%= @question.interview_type %></span>
+                    <span class="label">Topic: <%= @question.topic.topic_name %></span>
+                    <span class="author">Posted By: <%= @question.user.username %> on <%= @question.created_at.strftime('%a %d %b %Y') %></span>
+                  </div>
+                </div>
             </li>
         </ul>
       </div>
@@ -25,7 +33,23 @@
         <h3 class="content-subhead">User submitted Resources</h3>
         <ul class="list">
         <% @resources.each do |resource| %>
-          <li>Votes: <%= resource.votes %> (<%= link_to "Upvote", question_resource_upvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>, <%= link_to "Downvote", question_resource_downvote_path(question_id: @question.id, resource_id: resource.id), method: :patch %>)  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>   Topic: <%= resource.question.topic.topic_name %></li>
+          <li>
+            <div class="voting">
+                  <a href="/questions/<%= resource.question.id %>/resources/<%= resource.id %>/upvote" class="fa fa-plus-circle"></a>
+                  <br>
+                  <a href="/questions/<%= resource.question.id %>/resources/<%= resource.id %>/downvote" class="fa fa-minus-circle"></a>
+              </div>
+              <div class="pure-u-5-6">
+                <div class="votes">Votes: <%= resource.votes %></div>
+                <div class="summary">
+                  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                  </div>
+                  <div class="tags">
+                    <span class="label">Topic: <%= resource.question.topic.topic_name %></span>
+                    <span class="author">Posted By: <%= resource.user.username %> on <%= resource.created_at.strftime('%a %d %b %Y') %></span>
+                  </div>
+                </div>
+              </li>
         <% end %>
         </ul>
       </div>
@@ -53,7 +77,20 @@
         <h3 class="content-subhead">User submitted Answers</h3>
         <ul class="list">
         <% @answers.each do |answer| %>
-          <li>Votes: <%= answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: answer.id), method: :patch %>)  <%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></li>
+          <li>
+            <div class="voting">
+                  <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/upvote" class="fa fa-plus-circle"></a>
+                  <br>
+                  <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/downvote" class="fa fa-minus-circle"></a>
+            </div>
+            <div class="pure-u-5-6">
+              <div class="votes">Votes: <%= answer.votes %></div>
+              <div class="summary"><%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></div>
+              <div class="tags">
+                <span class="author">Posted By: <%= answer.user.username %> on <%= answer.created_at.strftime('%a %d %b %Y') %></span>
+              </div>
+            </div>
+          </li>
         <% end %>
         </ul>
 

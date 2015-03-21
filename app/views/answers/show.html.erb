@@ -4,19 +4,31 @@
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Answer Details</h3>
-        <p>Question type: <%= @question.interview_type %>
-        <audio src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= @answer.s3_audio_key %>" controls id="audio-playback" type="audio/ogg">Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
-        <div id="play-btn" class="play play-inactive firstplay"></div>
         <ul class="list">
-        <p>Link: <%= @answer.external_solution_link %>
 
           <li>
-            <div class="votes">Votes: <%= @answer.votes %> (<%= link_to "Upvote", question_answer_upvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>, <%= link_to "Downvote", question_answer_downvote_path(question_id: @question.id, answer_id: @answer.id), method: :patch %>)</div>
-            <br>
-            <div class="summary">Question: <a href="/questions/<%= @question.id %>"><%= @question.title %></a></div>
-            Answer Details:
-            <p> <%= @answer.content[-1] %></p>
-            <textarea value="<%= @answer.content[-1] %>"></textarea>
+            <div class="voting">
+                  <a href="/questions/<%= @answer.question.id %>/answers/<%= @answer.id %>/upvote" class="fa fa-plus-circle"></a>
+                  <br>
+                  <a href="/questions/<%= @answer.question.id %>/answers/<%= @answer.id %>/downvote" class="fa fa-minus-circle"></a>
+            </div>
+            <div class="pure-u-5-6">
+              <div class="votes">Votes: <%= @answer.votes %></div>
+              <br>
+              <div class="summary">Question: <a href="/questions/<%= @question.id %>"><%= @question.title %></a></div>
+
+              <p>Question type: <%= @question.interview_type %></p>
+              <p>Link: <%= @answer.external_solution_link %></p>
+              <audio src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= @answer.s3_audio_key %>" controls id="audio-playback" type="audio/ogg">Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
+              <div id="play-btn" class="play play-inactive firstplay"></div>
+              <p> Answer Details: <%= @answer.content[-1] %></p>
+            `<textarea value="<%= @answer.content[-1] %>"></textarea>
+
+              <div class="summary">Answer Details: <%= @answer.content %></div>
+              <div class="tags">
+                <span class="author">Posted By: <%= @answer.user.username %> on <%= @answer.created_at.strftime('%a %d %b %Y') %></span>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

@@ -18,10 +18,9 @@ module AnswersHelper
 
     object = bucket.put_object(options)
     p object.key
-    
+
   end
 
 
 
 end
-

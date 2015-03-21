@@ -16,16 +16,16 @@ Rails.application.routes.draw do
   get 'questions/tracks/:track/topics/:topic' => 'questions#topic'
   resources :questions, except: [:edit, :update, :create] do
     member do
-      patch 'upvote', to: 'questions#upvote'
-      patch 'downvote', to: 'questions#downvote'
+      get 'upvote', to: 'questions#upvote'
+      get 'downvote', to: 'questions#downvote'
     end
     resources :answers, only: [:new, :show, :create] do
-      patch 'upvote', to: 'answers#upvote'
-      patch 'downvote', to: 'answers#downvote'
+      get 'upvote', to: 'answers#upvote'
+      get 'downvote', to: 'answers#downvote'
     end
     resources :resources, only: [:new, :create] do
-      patch 'upvote', to: 'resources#upvote'
-      patch 'downvote', to: 'resources#downvote'
+      get 'upvote', to: 'resources#upvote'
+      get 'downvote', to: 'resources#downvote'
     end
   end
 

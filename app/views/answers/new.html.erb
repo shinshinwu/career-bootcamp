@@ -14,6 +14,7 @@
 
       <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked", "data-user-id" => @question.user.id, "data-question-id" => @question.id} do |f| %>
         <fieldset>
+        <legend>Submit Your Answer</legend>
         <%= f.hidden_field :content, :id => "code-array" %>
         <%= f.text_field :external_solution_link, placeholder: "Add external link (e.g. GitHub, CodePen or JSFiddle)" %>
         <%= f.submit "Submit", :class => 'pure-button', :id => "submitBtn", :disabled => true %>
