@@ -251,7 +251,6 @@ a.pure-button-primary {
     }
     /* We want to give the content area some more padding */
     .content {
-        margin-top: 1.5em;
         padding: 1em;
     }
 
@@ -292,6 +291,15 @@ a.pure-button-primary {
 ---- Custom styles---
 */
 
+.splash-container.landing-page {
+    background-image: url(/landing-page.png);
+    background-repeat: none;
+}
+
+.content {
+    padding-top: 3em;
+}
+
 ul {
     list-style: none;
 }
@@ -312,7 +320,7 @@ ul {
 }
 
 .tags {
-    padding: 0.5em;
+    padding-top: 0.5em;
 }
 
 .tags .label {
@@ -320,8 +328,28 @@ ul {
     background-color: #DAE6EF;
 }
 
-.tags .label:first-child {
-    margin-left: 4em;
+.tags .author {
+    float: right;
+}
+
+.voting {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    float: left;
+    margin-right: 0.5em;
+}
+
+.voting a {
+    font-size: 1.5em;
+    text-decoration: none;
+    color: #bababa;
+}
+
+.voting a:visited,
+.voting a:active {
+    color: #bababa;
+    text-decoration: none;
 }
 
 .pure-g {
