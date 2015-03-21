@@ -1,0 +1,40 @@
+<div class="content">
+  <h2 class="content-head is-center"><%= @track %> Track</h2>
+
+  <h3 class="content-head">Progress bar:</h3>
+  <!-- should the progress bar lay out in certain order? -->
+  <div class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <ul class="pure-menu-list topics">
+      <% @topics.each do |topic| %>
+      <li class="pure-menu-item"><a href="/questions/tracks/<%= @track.gsub(/\s/, '0') %>/topics/<%= topic.id %>" class="pure-menu-link"><%= topic.topic_name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+
+
+  <div class="pure-g">
+    <div class="pure-u-5-6">
+      <div class="l-box">
+        <h3 class="content-subhead">Interview Questions Related to <%= @topic.topic_name %></h3>
+        <ul class="list">
+          <% @questions.each do |question| %>
+          <li>
+            <div class="votes">Votes: <%= question.votes %> (<%= link_to "Upvote", upvote_question_path(question.id), method: :patch %>, <%= link_to "Downvote", downvote_question_path(question.id), method: :patch %>)
+            </div>
+            <div class="summary">
+              <a href="/questions/<%= question.id %>"><%= question.title %></a>
+            </div>
+            <div class="tags">
+              <span class="label">Category: <%= question.job_title %></span>
+              <span class="label">Interview Type: <%= question.interview_type %></span>
+              <span class="label">Topic: <%= question.topic.topic_name %></span>
+             </div>
+          </li>
+          <% end %>
+        </ul>
+        <br>
+        <%= link_to "Submit a New Interview Question", new_question_path, method: :get, :class => 'pure-button pure-u-3-5' %>
+      </div>
+    </div>
+  </div>
+</div>

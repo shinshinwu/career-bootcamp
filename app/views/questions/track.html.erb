@@ -1,0 +1,15 @@
+<div class="content">
+  <h2 class="content-head is-center"><%= @track %> Track</h2>
+
+  <h3 class="content-head">Progress bar:</h3>
+  <!-- should the progress bar lay out in certain order? -->
+<div class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+  <ul class="pure-menu-list topics">
+    <% @topics.each do |topic| %>
+    <li class="pure-menu-item"><a href="/questions/tracks/<%= @track.gsub(/\s/, '0') %>/topics/<%= topic.id %>" class="pure-menu-link"><%= topic.topic_name %></a></li>
+    <% end %>
+  </ul>
+</div>
+
+  <h3 class="is-center">Please choose a topic above to start your learning progress!</h3>
+</div>

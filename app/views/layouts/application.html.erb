@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Career Bootcamp - Where you kickstart your career!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Career Bootcamp - Where you kickstart your career">
+  <title>Career Bootcamp - Where you kickstart your career</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <!--<![endif]-->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
 
-<%= yield %>
+  <header class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+      <a class="pure-menu-heading" href="/">Career Bootcamp</a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><%= link_to "Home", root_path, :class => "pure-menu-link" %></li>
+        <% if logged_in? %>
+          <li class="pure-menu-item"><%= link_to "Profile", current_user, :class => "pure-menu-link" %></li>
+          <li class="pure-menu-item"><%= link_to "Interview Tracks", tracks_path, :class => "pure-menu-link" %></li>
+          <li class="pure-menu-item"><%= link_to "Log out", logout_path, method: "delete", :class => "pure-menu-link" %></li>
+        <% else %>
+          <li class="pure-menu-item"><%= link_to "Sign Up", signup_path, :class => "pure-menu-link" %></li>
+          <li class="pure-menu-item"><%= link_to "Log In", login_path, :class => "pure-menu-link" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </header>
 
+  <%= yield %>
+
+  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

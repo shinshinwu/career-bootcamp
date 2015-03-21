@@ -1,0 +1,25 @@
+<div class="content">
+
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+      <br><br>
+      <%= link_to "Show Question", @question, :class => 'pure-button pure-u-1' %>
+      <%= form_for @resource, url: {action: "create"}, html: {class: "pure-form pure-form-stacked"} do |f| %>
+        <br>
+        <fieldset>
+        <legend>Add New Resource to help your fellow job hunters to review topics related to the question</legend>
+        <%= f.label :title, 'A concise title for your resource' %>
+        <%= f.text_field :title, placeholder: 'Secret of the Universe' %>
+
+        <%= f.label :link, 'Link to external resource' %>
+        <%= f.text_field :link, placeholder: 'http://www.greatresource.com' %>
+
+        <%= f.label :content, 'Add some details about your resource' %>
+        <%= f.text_area :content, :rows => 10, :class => "pure-input-1", placeholder: 'This resource explains alpha and is great because of beta...' %>
+        <br>
+        <%= f.submit "Submit", :class => 'pure-button' %>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>
