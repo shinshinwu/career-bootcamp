@@ -9,9 +9,9 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
- *= require_tree .
+ *= require answers
  *= require_self
+ *= require_tree .
  */
 
 * {
@@ -251,6 +251,7 @@ a.pure-button-primary {
     }
     /* We want to give the content area some more padding */
     .content {
+        margin-top: 1.5em;
         padding: 1em;
     }
 
@@ -291,15 +292,6 @@ a.pure-button-primary {
 ---- Custom styles---
 */
 
-.splash-container.landing-page {
-    background-image: url(/landing-page.png);
-    background-repeat: none;
-}
-
-.content {
-    padding-top: 3em;
-}
-
 ul {
     list-style: none;
 }
@@ -320,7 +312,7 @@ ul {
 }
 
 .tags {
-    padding-top: 0.5em;
+    padding: 0.5em;
 }
 
 .tags .label {
@@ -328,28 +320,8 @@ ul {
     background-color: #DAE6EF;
 }
 
-.tags .author {
-    float: right;
-}
-
-.voting {
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
-    float: left;
-    margin-right: 0.5em;
-}
-
-.voting a {
-    font-size: 1.5em;
-    text-decoration: none;
-    color: #bababa;
-}
-
-.voting a:visited,
-.voting a:active {
-    color: #bababa;
-    text-decoration: none;
+.tags .label:first-child {
+    margin-left: 4em;
 }
 
 .pure-g {

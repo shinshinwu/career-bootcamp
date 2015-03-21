@@ -4,15 +4,20 @@
     <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 
 <!-- need to figure out some way to show different type of answer form depends on the interview question type such as phone or in person etc -->
+  <h1 id="timer">&nbsp;</h1>
+  <h2 id="question" class="hide">Describe how GitHub optimizes your workflow</h2>
+    <button id="record-btn" class="record record-inactive"></button>
+    <div id="play-btn" class="play play-inactive hide firstplay"></div>
+    <audio controls id="audio" type="audio/ogg">Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
 
-      <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked"} do |f| %>
+    <textarea id="code-area" class="pure-input-1 code-area code-disabled" disabled></textarea>
 
+      <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked", "data-user-id" => @question.user.id, "data-question-id" => @question.id} do |f| %>
         <fieldset>
         <legend>Submit Your Answer</legend>
-        <%= f.label :content, 'Answer Details' %>
-        <%= f.text_area :content, :rows => 10, :class => "pure-input-1", placeholder: 'The answer should be alpha because of beta...' %>
-        <br>
-        <%= f.submit "Submit", :class => 'pure-button' %>
+        <%= f.hidden_field :content, :id => "code-array" %>
+        <%= f.text_field :external_solution_link, placeholder: "Add external link (e.g. GitHub, CodePen or JSFiddle)" %>
+        <%= f.submit "Submit", :class => 'pure-button', :id => "submitBtn", :disabled => true %>
         </fieldset>
       <% end %>
     </div>

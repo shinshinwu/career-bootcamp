@@ -17,6 +17,13 @@
               <br>
               <div class="summary">Question: <a href="/questions/<%= @question.id %>"><%= @question.title %></a></div>
 
+              <p>Question type: <%= @question.interview_type %></p>
+              <p>Link: <%= @answer.external_solution_link %></p>
+              <audio src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= @answer.s3_audio_key %>" controls id="audio-playback" type="audio/ogg">Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
+              <div id="play-btn" class="play play-inactive firstplay"></div>
+              <p> Answer Details: <%= @answer.content[-1] %></p>
+            `<textarea value="<%= @answer.content[-1] %>"></textarea>
+
               <div class="summary">Answer Details: <%= @answer.content %></div>
               <div class="tags">
                 <span class="author">Posted By: <%= @answer.user.username %> on <%= @answer.created_at.strftime('%a %d %b %Y') %></span>

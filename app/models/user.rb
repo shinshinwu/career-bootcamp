@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   def submitted_answer?(question_id)
     !self.answers.find_by(question_id: question_id).nil?
   end
+ # model to use has_secure_password
 
   def submitted_resource?(question_id)
     !self.resources.find_by(question_id: question_id).nil?

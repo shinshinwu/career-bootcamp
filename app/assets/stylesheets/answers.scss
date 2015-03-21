@@ -1,3 +1,67 @@
 // Place all the styles related to the answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+    button {
+      width: 30px;
+      height: 30px;
+    }
+    audio {
+      margin-left: 200px;
+    }
+    .record-inactive {
+      background-color: red;
+      border-radius: 50px;
+    }
+    .record-active {
+      background-color: grey;
+      border-radius: 0px;
+    }
+    .record-paused {
+      background-color: blue;
+      border-radius: 0px;
+    }
+    .record:active, .record:focus {
+      outline: 0;
+      border:0;
+    }
+    .play {
+      margin-top: 20px;
+    }
+    .play-inactive {
+      background-color: transparent;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 30px solid green;
+    }
+    .play-active {
+      width: 30px;
+      height: 30px;
+      background-color: red;
+    }
+    .play-paused {
+      width: 30px;
+      height: 30px;
+      background-color: blue
+    }
+    .playback-text{
+      color: green;
+    }
+    .code-playback{
+      background-color: #E6F5EB;
+    }
+    textarea {
+      display: block;
+    }
+    .code-area {
+      width: 500px;
+      height: 700px;
+    }
+    .code-disabled {
+      background-color: lightgrey;
+    }
+    .hide {
+      display: none;
+    }

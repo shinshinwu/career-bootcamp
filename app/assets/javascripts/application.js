@@ -13,6 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require modernizr
+//= require recorder
+//= require audio
+//= require form
+//= require timer
+//= require master
 //= require_tree .
 
 var make_button_active = function()
