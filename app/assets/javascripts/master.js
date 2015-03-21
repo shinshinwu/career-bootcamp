@@ -151,6 +151,9 @@ $(document).ready(function(){
       }.bind(this));
     }
   };
-
-masterController = new MasterController(3);
+  var answerPage = document.getElementById("answer");
+  if(document.getElementById("answer")){
+    var initialTime = answerPage.getAttribute("data-timer");
+    masterController = new MasterController(initialTime);
+  }
 });
