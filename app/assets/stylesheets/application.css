@@ -312,7 +312,11 @@ ul {
 }
 
 .tags {
-    padding: 0.5em;
+    padding-top: 0.5em;
+}
+
+.tags .author {
+    float: right;
 }
 
 .tags .label {
@@ -320,8 +324,24 @@ ul {
     background-color: #DAE6EF;
 }
 
-.tags .label:first-child {
-    margin-left: 4em;
+.voting {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    float: left;
+    margin-right: 0.5em;
+}
+
+.voting a {
+    text-decoration: none;
+    color: #bababa;
+    font-size: 1.5em;
+}
+
+.voting a:visited,
+.voting a:active {
+    color: #bababa;
+    text-decoration: none;
 }
 
 .pure-g {
@@ -376,6 +396,10 @@ ul {
 .new-question {
     display: block;
     margin: 0 auto;
+}
+
+.content {
+    padding-top: 3em;
 }
 /*
  * -- DESKTOP (AND UP) MEDIA QUERIES --
