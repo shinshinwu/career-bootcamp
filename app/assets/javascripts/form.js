@@ -1,9 +1,10 @@
 var FormController = function(){
+  this.codearea = document.getElementById("code-area");
   this.formEvent();
   this.formPending = false;
-  this.formCaptures = [];
+  this.formCaptures = this.setFormCaptures();
+  console.log(this.formCaptures);
   this.formCaptures[0] = "";
-  this.codearea = document.getElementById("code-area");
 };
 
 FormController.prototype = {
@@ -36,7 +37,11 @@ FormController.prototype = {
   formPlayback: function(time){
     if (time in this.formCaptures){
       this.codearea.value = this.formCaptures[time];
+      this.codearea.scrollTop = this.codearea.scrollHeight;
     }
+  },
+  setFormCaptures: function(){
+    return JSON.parse(this.codearea.getAttribute("data-answer-array")) || [];
   }
 };
 
