@@ -9,7 +9,8 @@ class AnswersController < ApplicationController
   def create
     AnswersHelper.aws_upload(params[:audio_file])
     @question = Question.find(params[:question_id])
-    @answer = Answer.new(question: @question, user_id: current_user.id, content: answer_params[:content], s3_audio_key: params[:audio_file].original_filename, external_solution_link: answer_params[:external_solution_link])
+    @answer = Answer.new(question: @question, user_id: current_user.id, content: JSON.parse(answer_params[:content]), s3_audio_key: params[:audio_file].original_filename, external_solution_link: answer_params[:external_solution_link])
+    p @answer.content
     if @answer.save
       p @answer.id
       redirect_to @answer
@@ -21,6 +22,8 @@ class AnswersController < ApplicationController
   def show
     @question = Question.find(params[:question_id])
     @answer = Answer.find(params[:id])
+    p @answer.content
+    @answer
   end
 
   def upvote

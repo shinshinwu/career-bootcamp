@@ -56,8 +56,12 @@
       display: block;
     }
     .code-area {
-      width: 500px;
-      height: 700px;
+      width: 100%;
+      height: 10rem;
+      max-height: 10rem;
+      overflow-y: scroll;
+      font-size: .85em;
+      line-height: 1.2;
     }
     .code-disabled {
       background-color: lightgrey;

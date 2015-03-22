@@ -2,27 +2,51 @@ $(document).ready(function(){
 
   var MasterController = function(maxTime){
     this.maxTime = maxTime;
-    this.audioController = new AudioController();
     this.formController = new FormController();
     this.timerController = new TimerController(this.maxTime);
-    this.playButtonListener();
-    this.recordButtonListener();
-    this.formListener();
-    this.submitListener();
-    this.timerController.updateTimer(maxTime);
+    this.audioPlayerListener();
+    if (document.getElementById("answer-record")){
+      this.formListener();
+      this.submitListener();
+      this.recordButtonListener();
+      this.audioController = new AudioController();
+      this.timerController.updateTimer(maxTime);
+    }
   };
 
   MasterController.prototype = {
+    audioPlayerListener: function(){
+      var audio = document.getElementById("audio");
+      var answerIndex = audio.getAttribute("data-answer-id");
+      audio.addEventListener('timeupdate', function(){
+        var time = Math.floor(audio.currentTime);
+        this.formController.formPlayback(time, answerIndex);
+        // if (audio.ended){
+        
+      }.bind(this));
+    
+      // audio.addEventListener('play', function(){
+      //   this.startPlayback();
+      // }.bind(this));
+
+      // audio.addEventListener('pause', function(){
+      //   this.pausePlayback();
+      // }.bind(this));
+
+      // audio.addEventListener('seeked', function(){
+
+      // });
+    },
     formListener: function(){
       document.getElementById("code-area").addEventListener("keyup", function(){
         this.formController.formEvent(this.maxTime-this.timerController.time);
       }.bind(this));
     },
-    pausePlayback: function(btn){
+    pausePlayback: function(){
       var audio = document.querySelector('audio');
       audio.pause();
-      btn.classList.remove('play-active');
-      btn.classList.add('play-paused');
+      // btn.classList.remove('play-active');
+      // btn.classList.add('play-paused');
       this.pausePlaybackTimer();
       this.formController.formDisable();
     },
@@ -39,19 +63,6 @@ $(document).ready(function(){
     pauseRecordingTimer: function(){
       clearInterval(this.recordingTimer);
     },
-    playButtonListener: function(){
-      var btn = document.getElementById("play-btn");
-    
-      btn.addEventListener('click', function(){
-        if (btn.classList.contains("play-active")){
-          this.pausePlayback(btn);
-        } else {
-          this.startPlayback(btn);
-        }
-
-        // this.audioController.playButtonEvent(btn);
-      }.bind(this));
-    },
     recordButtonListener: function(){
       var btn = document.getElementById("record-btn"),
         title = document.getElementById("question");
@@ -63,26 +74,34 @@ $(document).ready(function(){
         }
       }.bind(this));
     },
-    startPlayback: function(btn){
-      var audio = document.querySelector('audio');
-      document.getElementById("timer").classList.add('playback-text');
-      // console.log(btn.classList);
-      btn.classList.add('play-active');
-      btn.classList.remove('play-inactive');
-      audio.play();
+    // startPlayback: function(btn){
+    //   var audio = document.querySelector('audio');
+    //   var answerIndex = audio.getAttribute("data-answer-id")
+    //   console.log(answerIndex);
+    //   // document.getElementById("timer").classList.add('playback-text');
+    //   // // console.log(btn.classList);
+    //   // btn.classList.add('play-active');
+    //   // btn.classList.remove('play-inactive');
+    //   // audio.play();
 
-      if (btn.classList.contains("firstplay")){
-        this.formController.formPlayback(0);
-      }
+    //   // if (audio.getAttribute("data-play") == "firstplay"){
+    //   //   this.formController.formPlayback(0);
+    //   //   audio.setAttribute("data-play", "");
+    //   // }
 
-      var playbackTimer = setInterval(function(){
-        time = this.timerController.incrementSecond();
-        this.formController.formPlayback(time);
-        if (time === this.maxTime){
-          this.stopPlayback(playbackTimer);
-        }
-      }.bind(this), 1000);
-    },
+    //   // var playbackTimer = setInterval(function(){
+    //     // time = this.timerController.incrementSecond();
+    //     audio.addEventListener('ontimeupdate', function(){
+    //       var time = audio.currentTime;
+    //       console.log(time);
+    //       this.formController.formPlayback(time, answerIndex);
+    //       // if (audio.ended){
+          
+    //     }.bind(this));
+    //       // this.stopPlayback(playbackTimer);
+    //     // }
+    //   // }.bind(this), 1000);
+    // },
     startRecording: function(btn, title){
       btn.classList.add('record-active');
       btn.classList.remove('record-inactive');
@@ -151,6 +170,9 @@ $(document).ready(function(){
       }.bind(this));
     }
   };
-
-masterController = new MasterController(3);
+  var answerPage = document.getElementById("answer-record") || document.getElementById("answer-play");
+  if(answerPage){
+    var initialTime = answerPage.getAttribute("data-timer");
+    masterController = new MasterController(initialTime);
+  }
 });
