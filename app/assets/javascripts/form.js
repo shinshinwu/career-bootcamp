@@ -2,9 +2,8 @@ var FormController = function(){
   this.codearea = document.getElementById("code-area");
   this.formEvent();
   this.formPending = false;
-  this.formCaptures = this.setFormCaptures();
+  this.formCaptures = this.setMultipleFormCaptures();
   console.log(this.formCaptures);
-  this.formCaptures[0] = "";
 };
 
 FormController.prototype = {
@@ -34,14 +33,23 @@ FormController.prototype = {
       this.formCapture(time);
     }
   },
-  formPlayback: function(time){
-    if (time in this.formCaptures){
-      this.codearea.value = this.formCaptures[time];
-      this.codearea.scrollTop = this.codearea.scrollHeight;
+  formPlayback: function(time, ansIndex){
+    if (time in this.formCaptures[ansIndex]){
+      var localCodearea = document.getElementById("code-area-" + ansIndex);
+      localCodearea.value = this.formCaptures[ansIndex][time];
+      localCodearea.scrollTop = localCodearea.scrollHeight;
     }
   },
-  setFormCaptures: function(){
-    return JSON.parse(this.codearea.getAttribute("data-answer-array")) || [];
+  setMultipleFormCaptures: function(){
+    formsObject = {};
+    var codeareas = document.getElementsByClassName('code-area');
+
+    for (var i=0; i<codeareas.length; i++){
+      var answerIndex = codeareas[i].getAttribute("data-answer-id");
+      formsObject[answerIndex] = JSON.parse(codeareas[i].getAttribute("data-answer-array")) || [];
+      formsObject[answerIndex][0] = "";
+    }
+    return formsObject;
   }
 };
 

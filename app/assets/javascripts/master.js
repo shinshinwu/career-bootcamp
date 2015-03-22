@@ -17,9 +17,10 @@ $(document).ready(function(){
   MasterController.prototype = {
     audioPlayerListener: function(){
       var audio = document.getElementById("audio");
+      var answerIndex = audio.getAttribute("data-answer-id");
       audio.addEventListener('timeupdate', function(){
         var time = Math.floor(audio.currentTime);
-        this.formController.formPlayback(time);
+        this.formController.formPlayback(time, answerIndex);
         // if (audio.ended){
         
       }.bind(this));
@@ -73,33 +74,34 @@ $(document).ready(function(){
         }
       }.bind(this));
     },
-    startPlayback: function(btn){
-      var audio = document.querySelector('audio');
+    // startPlayback: function(btn){
+    //   var audio = document.querySelector('audio');
+    //   var answerIndex = audio.getAttribute("data-answer-id")
+    //   console.log(answerIndex);
+    //   // document.getElementById("timer").classList.add('playback-text');
+    //   // // console.log(btn.classList);
+    //   // btn.classList.add('play-active');
+    //   // btn.classList.remove('play-inactive');
+    //   // audio.play();
 
-      // document.getElementById("timer").classList.add('playback-text');
-      // // console.log(btn.classList);
-      // btn.classList.add('play-active');
-      // btn.classList.remove('play-inactive');
-      // audio.play();
+    //   // if (audio.getAttribute("data-play") == "firstplay"){
+    //   //   this.formController.formPlayback(0);
+    //   //   audio.setAttribute("data-play", "");
+    //   // }
 
-      // if (audio.getAttribute("data-play") == "firstplay"){
-      //   this.formController.formPlayback(0);
-      //   audio.setAttribute("data-play", "");
-      // }
-
-      // var playbackTimer = setInterval(function(){
-        // time = this.timerController.incrementSecond();
-        audio.addEventListener('ontimeupdate', function(){
-          var time = audio.currentTime;
-          console.log(time);
-          this.formController.formPlayback(time);
-          // if (audio.ended){
+    //   // var playbackTimer = setInterval(function(){
+    //     // time = this.timerController.incrementSecond();
+    //     audio.addEventListener('ontimeupdate', function(){
+    //       var time = audio.currentTime;
+    //       console.log(time);
+    //       this.formController.formPlayback(time, answerIndex);
+    //       // if (audio.ended){
           
-        }.bind(this));
-          // this.stopPlayback(playbackTimer);
-        // }
-      // }.bind(this), 1000);
-    },
+    //     }.bind(this));
+    //       // this.stopPlayback(playbackTimer);
+    //     // }
+    //   // }.bind(this), 1000);
+    // },
     startRecording: function(btn, title){
       btn.classList.add('record-active');
       btn.classList.remove('record-inactive');

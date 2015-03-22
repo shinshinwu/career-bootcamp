@@ -8,9 +8,9 @@
   <h2 id="question" class="hide">Describe how GitHub optimizes your workflow</h2>
     <button id="record-btn" class="record record-inactive"></button>
     <div id="play-btn" class="play play-inactive hide firstplay"></div>
-    <audio controls id="audio" type="audio/ogg">Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
+    <audio controls id="audio" type="audio/ogg" data-answer-id="unsaved">Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
 
-    <textarea id="code-area" class="pure-input-1 code-area code-disabled" disabled></textarea>
+    <textarea id="code-area" class="pure-input-1 code-area code-disabled" disabled data-answer-id="unsaved"></textarea>
 
       <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked", "data-user-id" => @question.user.id, "data-question-id" => @question.id} do |f| %>
         <fieldset>
