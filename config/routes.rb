@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'tracks' => 'questions#index'
   get 'questions/tracks/:track' => 'questions#track'
   get 'questions/tracks/:track/topics/:topic' => 'questions#topic'
-  resources :questions, except: [:edit, :update, :create] do
+  resources :questions, except: [:edit, :update] do
     member do
       get 'upvote', to: 'questions#upvote'
       get 'downvote', to: 'questions#downvote'
