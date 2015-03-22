@@ -13,7 +13,8 @@
               </div>
               <div class="pure-u-5-6">
                 <div class="votes">Votes: <%= @question.votes %></div>
-                  <div class="summary">Content: <%= @question.content %></div>
+                  <div class="summary"><%= @question.title %></div>
+                  <div class="summary"><%= @question.content %></div>
                   <div class="tags">
                     <span class="label">Category: <%= @question.job_title %></span>
                     <span class="label">Interview Type: <%= @question.interview_type %></span>
@@ -31,6 +32,7 @@
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">User submitted Resources</h3>
+        <% if @question.resources.any? %>
         <ul class="list">
         <% @resources.each do |resource| %>
           <li>
@@ -42,7 +44,10 @@
               <div class="pure-u-5-6">
                 <div class="votes">Votes: <%= resource.votes %></div>
                 <div class="summary">
-                  <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                  <a href="<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                  </div>
+                  <div class="summary">
+                    <%= resource.content %>
                   </div>
                   <div class="tags">
                     <span class="label">Topic: <%= resource.question.topic.topic_name %></span>
@@ -50,6 +55,9 @@
                   </div>
                 </div>
               </li>
+        <% end %>
+        <% else %>
+        <h4>Currently no resources has been submitted yet related to this question. Be the first!</h4>
         <% end %>
         </ul>
       </div>
