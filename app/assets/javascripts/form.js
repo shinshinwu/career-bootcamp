@@ -11,7 +11,7 @@ FormController.prototype = {
     this.formPending = true;
     window.setTimeout(function(){
       var code = this.codearea.value;
-      this.formCaptures[time] = code;
+      this.formCaptures["unsaved"][time] = code;
       this.formPending = false;
     }.bind(this), 500);
   },

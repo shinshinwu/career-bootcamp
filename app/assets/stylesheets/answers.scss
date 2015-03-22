@@ -69,3 +69,22 @@
     .hide {
       display: none;
     }
+    .right {
+      float: right;
+    }
+    .left {
+      float: left;
+    }
+    .center {
+      margin: 0 auto;
+      display: inline-block;
+    }
+    .center-align {
+      text-align: center;
+    }
+    .list {
+      padding-left: 0;
+    }
+    .hack-left {
+      width: 66%;
+    }

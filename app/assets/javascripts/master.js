@@ -16,14 +16,15 @@ $(document).ready(function(){
 
   MasterController.prototype = {
     audioPlayerListener: function(){
-      var audio = document.getElementById("audio");
-      var answerIndex = audio.getAttribute("data-answer-id");
-      audio.addEventListener('timeupdate', function(){
-        var time = Math.floor(audio.currentTime);
-        this.formController.formPlayback(time, answerIndex);
-        // if (audio.ended){
-        
-      }.bind(this));
+      var audio_elements = document.getElementsByClassName("audio");
+      var self = this;
+      for (var i=0; i<audio_elements.length; i++){
+        audio_elements[i].addEventListener('timeupdate', function(){
+          var answerIndex = this.getAttribute("data-answer-id");
+          var time = Math.floor(this.currentTime);
+          self.formController.formPlayback(time, answerIndex);
+        });
+      }
     
       // audio.addEventListener('play', function(){
       //   this.startPlayback();
@@ -137,7 +138,7 @@ $(document).ready(function(){
       this.audioController.stopRecording(audio, submitBtn);
       document.getElementById("play-btn").classList.remove('hide');
       document.getElementById("record-btn").classList.add('hide');
-      document.getElementById("code-array").value = JSON.stringify(this.formController.formCaptures);
+      document.getElementById("code-array").value = JSON.stringify(this.formController.formCaptures["unsaved"]);
     },
     submitListener: function(){
       var form = document.getElementById("new_answer");

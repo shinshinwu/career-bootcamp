@@ -1,113 +1,117 @@
 <div class="content" id="answer-play">
 
   <div class="pure-g">
-    <div class="pure-u-5-6">
+    <div class="pure-u-2-3 left">
       <div class="l-box">
-        <h3 class="content-subhead">Question: <%= @question.title %></h3>
+        <h1 class="content-subhead"><%= @question.title %></h1>
         <ul class="list">
           <li>
             <div class="voting">
-                  <a href="/questions/<%= @question.id %>/upvote" class="fa fa-plus-circle"></a>
-                  <br>
-                  <a href="/questions/<%= @question.id %>/downvote" class="fa fa-minus-circle"></a>
+              <a href="/questions/<%= @question.id %>/upvote" class="fa fa-plus-circle"></a>
+              <br>
+              <a href="/questions/<%= @question.id %>/downvote" class="fa fa-minus-circle"></a>
+            </div>
+            <div class="pure-u-5-6">
+              <div class="votes">Votes: <%= @question.votes %></div>
+              <div class="summary">Content: <%= @question.content %></div>
+              <div class="tags">
+                <span class="label">Category: <%= @question.job_title %></span>
+                <span class="label">Interview Type: <%= @question.interview_type %></span>
+                <span class="label">Topic: <%= @question.topic.topic_name %></span>
+                <span class="author">Posted By: <%= @question.user.username %> on <%= @question.created_at.strftime('%a %d %b %Y') %></span>
               </div>
-              <div class="pure-u-5-6">
-                <div class="votes">Votes: <%= @question.votes %></div>
-                  <div class="summary"><%= @question.title %></div>
-                  <div class="summary"><%= @question.content %></div>
-                  <div class="tags">
-                    <span class="label">Category: <%= @question.job_title %></span>
-                    <span class="label">Interview Type: <%= @question.interview_type %></span>
-                    <span class="label">Topic: <%= @question.topic.topic_name %></span>
-                    <span class="author">Posted By: <%= @question.user.username %> on <%= @question.created_at.strftime('%a %d %b %Y') %></span>
-                  </div>
-                </div>
-            </li>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="pure-g">
-    <div class="pure-u-5-6">
+    <div class="pure-u-1-3 right">
       <div class="l-box">
-        <h3 class="content-subhead">User submitted Resources</h3>
+        <h3 class="content-subhead center-align">User submitted Resources</h3>
         <% if @question.resources.any? %>
         <ul class="list">
-        <% @resources.each do |resource| %>
+          <% @resources.each do |resource| %>
           <li>
             <div class="voting">
-                  <a href="/questions/<%= resource.question.id %>/resources/<%= resource.id %>/upvote" class="fa fa-plus-circle"></a>
-                  <br>
-                  <a href="/questions/<%= resource.question.id %>/resources/<%= resource.id %>/downvote" class="fa fa-minus-circle"></a>
+              <a href="/questions/<%= resource.question.id %>/resources/<%= resource.id %>/upvote" class="fa fa-plus-circle"></a>
+              <br>
+              <a href="/questions/<%= resource.question.id %>/resources/<%= resource.id %>/downvote" class="fa fa-minus-circle"></a>
+            </div>
+            <div class="pure-u-5-6 center">
+              <div class="votes">Votes: <%= resource.votes %></div>
+              <div class="summary">
+                <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>
+              </div>
+              <div class="tags">
+                <span class="label">Topic: <%= resource.question.topic.topic_name %></span>
+                <span class="author">Posted By: <%= resource.user.username %> on <%= resource.created_at.strftime('%a %d %b %Y') %></span>
               </div>
               <div class="pure-u-5-6">
                 <div class="votes">Votes: <%= resource.votes %></div>
                 <div class="summary">
                   <a href="<%= resource.link %>" target="_blank"><%= resource.title %></a>
-                  </div>
-                  <div class="summary">
-                    <%= resource.content %>
-                  </div>
-                  <div class="tags">
-                    <span class="label">Topic: <%= resource.question.topic.topic_name %></span>
-                    <span class="author">Posted By: <%= resource.user.username %> on <%= resource.created_at.strftime('%a %d %b %Y') %></span>
-                  </div>
                 </div>
-              </li>
-        <% end %>
-        <% else %>
-        <h4>Currently no resources has been submitted yet related to this question. Be the first!</h4>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <% unless @user.submitted_resource?(@question.id) %>
-  <div class="pure-g">
-    <div class="pure-u-5-6">
-      <div class="l-box">
-        <h3 class="content-subhead">Have a Resource to Submit?</h3>
-
-        <%= link_to "Yes!", new_question_resource_path(question_id: @question.id), method: :get, :class => 'pure-button pure-u-1-5' %>
-
-      </div>
-    </div>
-  </div>
-  <% end %>
-
-  <div class="pure-g">
-    <div class="pure-u-5-6">
-      <div class="l-box">
-  <% if @user.submitted_answer?(@question.id) %>
-
-        <h3 class="content-subhead">User submitted Answers</h3>
-        <ul class="list">
-        <% @answers.each do |answer| %>
-          <li>
-            <div class="voting">
-                  <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/upvote" class="fa fa-plus-circle"></a>
-                  <br>
-                  <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/downvote" class="fa fa-minus-circle"></a>
-            </div>
-            <div class="pure-u-5-6">
-              <div class="votes">Votes: <%= answer.votes %></div>
-              <audio data-answer-id="<%= answer.id %>" src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= answer.s3_audio_key %>" controls id="audio" type="audio/ogg" >Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
-              <div class="summary"><%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></div>
-               <form class="pure-form pure-form-stacked">
-                <textarea id="code-area-<%= answer.id %>" class="pure-input-1 code-area code-disabled disabled" data-answer-id="<%= answer.id %>" data-answer-array="<%= answer.content %>" ><%= answer.content[-1] %></textarea>
-              </form>
-              <div class="tags">
-                <span class="author">Posted By: <%= answer.user.username %> on <%= answer.created_at.strftime('%a %d %b %Y') %></span>
+                <div class="summary">
+                  <%= resource.content %>
+                </div>
+                <div class="tags">
+                  <span class="label">Topic: <%= resource.question.topic.topic_name %></span>
+                  <span class="author">Posted By: <%= resource.user.username %> on <%= resource.created_at.strftime('%a %d %b %Y') %></span>
+                </div>
               </div>
+            </li>
+            <% end %>
+            <% else %>
+            <h4>Currently no resources has been submitted yet related to this question. Be the first!</h4>
+            <% end %>
+          </ul>
+          <% unless @user.submitted_resource?(@question.id) %>
+          <div class="l-box">
+            <h3 class="content-subhead center-align">Have a Resource to Submit?</h3>
+            <div class="center-align"><%= link_to "Yes!", new_question_resource_path(question_id: @question.id), method: :get, :class => 'pure-button center' %></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="pure-g">
+  <div class="pure-u-2-3 left hack-left">
+    <div class="l-box">
+      <% if @user.submitted_answer?(@question.id) %>
+
+      <h3 class="content-subhead">User submitted Answers</h3>
+      <ul class="list">
+        <% @answers.each do |answer| %>
+        <li>
+          <div class="voting">
+            <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/upvote" class="fa fa-plus-circle"></a>
+            <br>
+            <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/downvote" class="fa fa-minus-circle"></a>
+          </div>
+          <div class="pure-u-5-6">
+            <div class="votes">Votes: <%= answer.votes %></div>
+            <audio data-answer-id="<%= answer.id %>" src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= answer.s3_audio_key %>" controls class="audio" type="audio/ogg" >Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
+            <div class="summary"><%= link_to "View Answer", question_answer_path(question_id: @question.id, id: answer.id), method: :get %></div>
+            <form class="pure-form pure-form-stacked">
+              <textarea id="code-area-<%= answer.id %>" class="pure-input-1 code-area code-disabled disabled" data-answer-id="<%= answer.id %>" data-answer-array="<%= answer.content %>" ><%= answer.content[-1] %></textarea>
+            </form>
+            <div class="tags">
+              <span class="author">Posted By: <%= answer.user.username %> on <%= answer.created_at.strftime('%a %d %b %Y') %></span>
             </div>
-          </li>
+          </div>
+        </li>
         <% end %>
-        </ul>
+      </ul>
 
 
-  <% else %>
+      <% else %>
 
       <h3 class="content-subhead">Ready to Submit Your Answer?</h3>
 
