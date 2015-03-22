@@ -123,8 +123,9 @@ a.pure-button-primary {
 
 .home-menu .pure-menu-heading {
     color: white;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 120%;
+    text-transform: none;
 }
 
 .home-menu .pure-menu-selected a {
@@ -148,6 +149,8 @@ a.pure-button-primary {
  */
 .landing-page {
     background: #1f8dd6;
+    background-image: url(/landing-page.png);
+    background-repeat: none;
 }
 
 .splash-container {
