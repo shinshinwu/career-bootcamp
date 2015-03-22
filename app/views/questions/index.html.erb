@@ -30,7 +30,7 @@
     <div class="pure-g">
       <div class="pure-u-1-2">
         <div class="l-box">
-          <h3 class="content-subhead is-center">Latest Interview Questions Feed</h3>
+          <h3 class="content-subhead is-center">Most Popular Interview Questions</h3>
           <ul class="list">
             <% @questions.each do |question| %>
             <li>
@@ -59,7 +59,7 @@
 
       <div class="pure-u-1-2">
         <div class="l-box">
-          <h3 class="content-subhead is-center">Latest Resources Feed</h3>
+          <h3 class="content-subhead is-center"> Most Popular Resources</h3>
           <ul class="list">
             <% @resources.each do |resource| %>
             <li>
@@ -71,11 +71,14 @@
               <div class="pure-u-5-6">
                 <div class="votes">Votes: <%= resource.votes %></div>
                   <div class="summary">
-                    <a href="http://<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                    <a href="<%= resource.link %>" target="_blank"><%= resource.title %></a>
+                  </div>
+                  <div class="summary">
+                    <%= resource.content %>
                   </div>
                   <div class="tags">
                     <span class="label">Topic: <%= resource.question.topic.topic_name %>
-                      <span class="author">Posted By: <%= resource.user.username %> on <%= resource.created_at.strftime('%a %d %b %Y') %></span>
+                    <span class="author">Posted By: <%= resource.user.username %> on <%= resource.created_at.strftime('%a %d %b %Y') %></span>
                     </span>
                   </div>
                 </div>

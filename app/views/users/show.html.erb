@@ -5,22 +5,27 @@
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Questions Submitted by You</h3>
-        <ul class="list">
-          <% @user.questions.each do |question| %>
-          <li>
-            <div class="votes">Votes: <%= question.votes %>
-            </div>
-            <div class="summary">
-              <a href="/questions/<%= question.id %>"><%= question.title %></a>
-            </div>
-            <div class="tags">
-              <span class="label">Category: <%= question.job_title %></span>
-              <span class="label">Interview Type: <%= question.interview_type %></span>
-              <span class="label">Topic: <%= question.topic.topic_name %></span>
-            </div>
-          </li>
-          <% end %>
-        </ul>
+        <% if @user.questions.any? %>
+          <ul class="list">
+            <% @user.questions.each do |question| %>
+            <li>
+              <div class="votes">Votes: <%= question.votes %>
+              </div>
+              <div class="summary">
+                <a href="/questions/<%= question.id %>"><%= question.title %></a>
+              </div>
+              <div class="tags">
+                <span class="label">Category: <%= question.job_title %></span>
+                <span class="label">Interview Type: <%= question.interview_type %></span>
+                <span class="label">Topic: <%= question.topic.topic_name %></span>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <h4>You haven't submmited any interview questions yet, bugger! Add one today!</h4>
+          <%= link_to "Submit a New Interview Question", new_question_path, method: :get, :class => 'pure-button pure-u-3-5' %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -29,6 +34,7 @@
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Answers Submitted by You</h3>
+        <% if @user.answers.any? %>
         <ul class="list">
           <% @user.answers.each do |answer| %>
           <li>
@@ -39,6 +45,9 @@
           </li>
           <% end %>
         </ul>
+        <% else %>
+          <h4>You haven't submmited any answers yet, bugger! Browse through <a href="/tracks">our question database</a> and submit an answer to a question!</h4>
+        <% end %>
       </div>
     </div>
   </div>
@@ -48,19 +57,23 @@
     <div class="pure-u-5-6">
       <div class="l-box">
         <h3 class="content-subhead">Resources Submitted by You</h3>
-        <ul class="list">
-          <% @user.resources.each do |resource| %>
-          <li>
-            <div class="votes">Votes: <%= resource.votes %></div>
-            <div class="summary">
-              <a href="<%= resource.link %>"><%= resource.title %></a>
-            </div>
-            <div class="tags">
-              <span class="label">Content: <%= resource.content %></span>
-            </div>
-          </li>
-          <% end %>
-        </ul>
+        <% if @user.resources.any? %>
+          <ul class="list">
+            <% @user.resources.each do |resource| %>
+            <li>
+              <div class="votes">Votes: <%= resource.votes %></div>
+              <div class="summary">
+                <a href="<%= resource.link %>"><%= resource.title %></a>
+              </div>
+              <div class="tags">
+                <span class="label">Content: <%= resource.content %></span>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <h4>You haven't submmited any resources yet, bugger! Browse through <a href="/tracks">our question database</a> and submit a question-related resource!</h4>
+        <% end %>
       </div>
     </div>
   </div>

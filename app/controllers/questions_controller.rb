@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
 
   def index
-    @questions = Question.order(created_at: :desc).limit(10)
-    @resources = Resource.order(created_at: :desc).limit(10)
+    @questions = Question.order(votes: :desc).limit(10)
+    @resources = Resource.order(votes: :desc).limit(10)
   end
 
   def track
