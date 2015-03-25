@@ -2,21 +2,23 @@
 
   <div class="pure-g">
     <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+    <p id="audio-error" class="audio-error">Please approve use of microphone to continue.</p>
 
 <!-- need to figure out some way to show different type of answer form depends on the interview question type such as phone or in person etc -->
-  <h1 id="timer">&nbsp;</h1>
-  <h2 id="question" class="hide">Describe how GitHub optimizes your workflow</h2>
-    <button id="record-btn" class="record record-inactive"></button>
+  <h1 id="timer" class="timer-title">&nbsp;</h1>
+  <h2 id="question" class="hide"><%= @question.title %></h2>
+  <p id="question-sub" class="hide"><%= @question.content %></p>
+    <button id="record-btn" class="record record-disabled" disabled></button>
     <div id="play-btn" class="play play-inactive hide firstplay"></div>
-    <audio controls id="audio" type="audio/ogg" data-answer-id="unsaved">Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
+    <audio controls id="audio" class="audio-box" type="audio/ogg" data-answer-id="unsaved">Audio recording not supported on your browser, switch to Firefox or Chrome</audio>
 
-    <textarea id="code-area" class="pure-input-1 code-area code-disabled" disabled data-answer-id="unsaved"></textarea>
+    <textarea id="code-area" class="pure-input-1 code-area code-disabled disabled" disabled data-answer-id="unsaved"></textarea>
 
       <%= form_for @answer, url: {action: "create"}, html: {class: "pure-form pure-form-stacked", "data-user-id" => @question.user.id, "data-question-id" => @question.id} do |f| %>
         <fieldset>
-        <legend>Submit Your Answer</legend>
         <%= f.hidden_field :content, :id => "code-array" %>
-        <%= f.text_field :external_solution_link, placeholder: "Add external link (e.g. GitHub, CodePen or JSFiddle)" %>
+        <!-- <%= f.text_field :external_solution_link, placeholder: "Add external link (e.g. GitHub, CodePen or JSFiddle)" %> -->
+        <br />
         <%= f.submit "Submit", :class => 'pure-button', :id => "submitBtn", :disabled => true %>
         </fieldset>
       <% end %>

@@ -9,6 +9,7 @@ $(document).ready(function(){
       this.formListener();
       this.submitListener();
       this.recordButtonListener();
+      this.audioPlayerListener();
       this.audioController = new AudioController();
       this.timerController.updateTimer(maxTime);
     }
@@ -16,26 +17,15 @@ $(document).ready(function(){
 
   MasterController.prototype = {
     audioPlayerListener: function(){
-      var audio = document.getElementById("audio");
-      var answerIndex = audio.getAttribute("data-answer-id");
-      audio.addEventListener('timeupdate', function(){
-        var time = Math.floor(audio.currentTime);
-        this.formController.formPlayback(time, answerIndex);
-        // if (audio.ended){
-        
-      }.bind(this));
-    
-      // audio.addEventListener('play', function(){
-      //   this.startPlayback();
-      // }.bind(this));
-
-      // audio.addEventListener('pause', function(){
-      //   this.pausePlayback();
-      // }.bind(this));
-
-      // audio.addEventListener('seeked', function(){
-
-      // });
+      var audio_elements = document.getElementsByClassName("audio");
+      var self = this;
+      for (var i=0; i<audio_elements.length; i++){
+        audio_elements[i].addEventListener('timeupdate', function(){
+          var answerIndex = this.getAttribute("data-answer-id");
+          var time = Math.floor(this.currentTime);
+          self.formController.formPlayback(time, answerIndex);
+        });
+      }
     },
     formListener: function(){
       document.getElementById("code-area").addEventListener("keyup", function(){
@@ -45,15 +35,13 @@ $(document).ready(function(){
     pausePlayback: function(){
       var audio = document.querySelector('audio');
       audio.pause();
-      // btn.classList.remove('play-active');
-      // btn.classList.add('play-paused');
       this.pausePlaybackTimer();
       this.formController.formDisable();
     },
     pausePlaybackTimer: function(){
       clearInterval(this.playbackTimer);
     },
-    pauseRecording: function(btn, title){
+    pauseRecording: function(btn){
       btn.classList.remove('record-active');
       btn.classList.add('record-paused');
       this.pauseRecordingTimer();
@@ -65,60 +53,33 @@ $(document).ready(function(){
     },
     recordButtonListener: function(){
       var btn = document.getElementById("record-btn"),
-        title = document.getElementById("question");
+        title = document.getElementById("question"),
+        sub = document.getElementById("question-sub");
       btn.addEventListener('click', function(){
         if (btn.classList.contains("record-active")){
-          this.pauseRecording(btn, title);
+          this.pauseRecording(btn);
         } else {
-          this.startRecording(btn, title);
+          this.startRecording(btn, title, sub);
         }
       }.bind(this));
     },
-    // startPlayback: function(btn){
-    //   var audio = document.querySelector('audio');
-    //   var answerIndex = audio.getAttribute("data-answer-id")
-    //   console.log(answerIndex);
-    //   // document.getElementById("timer").classList.add('playback-text');
-    //   // // console.log(btn.classList);
-    //   // btn.classList.add('play-active');
-    //   // btn.classList.remove('play-inactive');
-    //   // audio.play();
-
-    //   // if (audio.getAttribute("data-play") == "firstplay"){
-    //   //   this.formController.formPlayback(0);
-    //   //   audio.setAttribute("data-play", "");
-    //   // }
-
-    //   // var playbackTimer = setInterval(function(){
-    //     // time = this.timerController.incrementSecond();
-    //     audio.addEventListener('ontimeupdate', function(){
-    //       var time = audio.currentTime;
-    //       console.log(time);
-    //       this.formController.formPlayback(time, answerIndex);
-    //       // if (audio.ended){
-          
-    //     }.bind(this));
-    //       // this.stopPlayback(playbackTimer);
-    //     // }
-    //   // }.bind(this), 1000);
-    // },
-    startRecording: function(btn, title){
+    startRecording: function(btn, title, sub){
       btn.classList.add('record-active');
       btn.classList.remove('record-inactive');
       btn.classList.remove('record-paused');
 
+      sub.classList.remove('hide');
       title.classList.remove("hide");
 
-      // this.audioController.recordButtonEvent(btn);
       this.audioController.startRecording();
       this.formController.formEnable();
       this.startRecordingTimer();
     },
     startRecordingTimer: function(){
-      var recordingTimer = setInterval(function(){
+      this.recordingTimer = setInterval(function(){
         var time = this.timerController.decrementSecond();
         if (time === 0){
-          this.stopRecording(recordingTimer);
+          this.stopRecording(this.recordingTimer);
         }
       }.bind(this), 1000);
     },
@@ -137,7 +98,7 @@ $(document).ready(function(){
       this.audioController.stopRecording(audio, submitBtn);
       document.getElementById("play-btn").classList.remove('hide');
       document.getElementById("record-btn").classList.add('hide');
-      document.getElementById("code-array").value = JSON.stringify(this.formController.formCaptures);
+      document.getElementById("code-array").value = JSON.stringify(this.formController.formCaptures["unsaved"]);
     },
     submitListener: function(){
       var form = document.getElementById("new_answer");
@@ -162,17 +123,23 @@ $(document).ready(function(){
           if (xhr.status === 200){
             console.log("success");
             console.log(xhr.statusText);
-            console.log(xhr.responseText);
+            console.log(JSON.parse(xhr.responseText).location);
+            window.location = JSON.parse(xhr.responseText).location;
           } else {
             console.log("error");
+            console.log(xhr.statusText);
+            console.log(xhr.responseText);
           }
         };
       }.bind(this));
     }
   };
-  var answerPage = document.getElementById("answer-record") || document.getElementById("answer-play");
-  if(answerPage){
-    var initialTime = answerPage.getAttribute("data-timer");
-    masterController = new MasterController(initialTime);
-  }
+  window.addEventListener("page:change", function() {
+    console.log("page change");
+    var answerPage = document.getElementById("answer-record") || document.getElementById("answer-play");
+    if(answerPage){
+      var initialTime = answerPage.getAttribute("data-timer");
+      masterController = new MasterController(initialTime);
+    }
+  });
 });

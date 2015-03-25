@@ -3,7 +3,7 @@
   <div class="pure-g">
     <div class="pure-u-5-6">
       <div class="l-box">
-        <h3 class="content-subhead">Answer Details</h3>
+        <h3 class="content-subhead">Answer details</h3>
         <ul class="list">
 
           <li>
@@ -21,17 +21,16 @@
               <% if @answer.external_solution_link %>
                 <p>Link: <%= @answer.external_solution_link %></p>
               <% end %>
-              <audio src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= @answer.s3_audio_key %>" controls id="audio" type="audio/ogg">Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
-              <!-- <div id="play-btn" class="play play-inactive firstplay"></div> -->
-              <p> Answer Details:</p>
+              <audio data-answer-id="<%= @answer.id %>" src="https://s3-us-west-1.amazonaws.com/careerbootcamp-audio/<%= @answer.s3_audio_key %>" controls class="audio" type="audio/ogg" >Audio playback not supported on your browser, switch to Firefox or Chrome</audio>
               <form class="pure-form pure-form-stacked">
-                <textarea id="code-area" class="pure-input-1 code-area code-disabled disabled" data-answer-array="<%= @answer.content %>"><%= @answer.content[-1] %></textarea>
+              <textarea id="code-area-<%= @answer.id %>" class="pure-input-1 code-area code-disabled disabled" data-answer-id="<%= @answer.id %>" data-answer-array="<%= JSON.dump(@answer.content) %>" ><%= @answer.content[-1] %></textarea>
               </form>
 
               <div class="summary"></div>
               <div class="tags">
                 <span class="author">Posted By: <%= @answer.user.username %> on <%= @answer.created_at.strftime('%a %d %b %Y') %></span>
               </div>
+              <a href="<%= url_for @question %>">« Back to question</a>
             </div>
           </li>
         </ul>

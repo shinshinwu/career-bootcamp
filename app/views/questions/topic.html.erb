@@ -15,7 +15,7 @@
   <div class="pure-g">
     <div class="pure-u-5-6">
       <div class="l-box">
-        <h3 class="content-subhead">Interview Questions Related to <%= @topic.topic_name %></h3>
+        <h3 class="content-subhead">Interview questions related to <%= @topic.topic_name %></h3>
         <ul class="list">
           <% @questions.each do |question| %>
           <li>
@@ -31,9 +31,9 @@
               </div>
               <div class="tags">
                 <span class="label">Category: <%= question.job_title %></span>
-                <span class="label">Interview Type: <%= question.interview_type %></span>
+                <span class="label">Interview type: <%= question.interview_type %></span>
                 <span class="label">Topic: <%= question.topic.topic_name %></span>
-                <span class="author">Posted By: <%= question.user.username %> on <%= question.created_at.strftime('%a %d %b %Y') %></span>
+                <span class="author">Posted by: <%= question.user.username %> on <%= question.created_at.strftime('%a %d %b %Y') %></span>
                </div>
              </div>
           </li>

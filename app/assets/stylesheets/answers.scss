@@ -9,8 +9,26 @@
     audio {
       margin-left: 200px;
     }
+    .timer-title {
+      display: inline-block;
+    }
+    .record {
+      display: inline-block;
+      margin-left: 8%;
+    }
+    .audio-box {
+      display: inline-block;
+      margin-left: 10%;
+      width: 50%;
+      position: relative;
+      top: 5px;
+    }
     .record-inactive {
       background-color: red;
+      border-radius: 50px;
+    }
+    .record-disabled {
+      background-color: grey;
       border-radius: 50px;
     }
     .record-active {
@@ -68,4 +86,26 @@
     }
     .hide {
       display: none;
+    }
+    .right {
+      float: right;
+    }
+    .left {
+      float: left;
+    }
+    .center {
+      margin: 0 auto;
+      display: inline-block;
+    }
+    .center-align {
+      text-align: center;
+    }
+    .list {
+      padding-left: 0;
+    }
+    .hack-left {
+      width: 66%;
+    }
+    .resource {
+      font-size: 0.85em;
     }

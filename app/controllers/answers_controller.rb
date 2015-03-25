@@ -10,12 +10,16 @@ class AnswersController < ApplicationController
     AnswersHelper.aws_upload(params[:audio_file])
     @question = Question.find(params[:question_id])
     @answer = Answer.new(question: @question, user_id: current_user.id, content: JSON.parse(answer_params[:content]), s3_audio_key: params[:audio_file].original_filename, external_solution_link: answer_params[:external_solution_link])
-    p @answer.content
     if @answer.save
-      p @answer.id
-      redirect_to @answer
+      render :json => {
+        :location => url_for([@question, @answer]),
+        :flash => "Your answer has been successfully saved"
+      }
     else
-      p 'something wrong with saving answer'
+      render :json => {
+        :location => url_for(@question),
+        :flash => {:notice => "There was an error saving your answer, please try again"}, :status => 500
+      }
     end
   end
 
