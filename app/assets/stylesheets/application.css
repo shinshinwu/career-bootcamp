@@ -150,7 +150,8 @@ a.pure-button-primary {
 .landing-page {
     background: #1f8dd6;
     background-image: url(/landing-page.png);
-    background-repeat: none;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .splash-container {
@@ -404,7 +405,7 @@ ul {
 }
 
 .content {
-    padding-top: 3em;
+    padding-top: 2em;
 }
 /*
  * -- DESKTOP (AND UP) MEDIA QUERIES --

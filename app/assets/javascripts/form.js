@@ -36,17 +36,20 @@ FormController.prototype = {
   formPlayback: function(time, ansIndex){
     if (time in this.formCaptures[ansIndex]){
       var localCodearea = document.getElementById("code-area-" + ansIndex);
-      localCodearea.value = this.formCaptures[ansIndex][time];
+      if (this.formCaptures[ansIndex][time] || time === 0){
+        localCodearea.value = this.formCaptures[ansIndex][time];
+      }
       localCodearea.scrollTop = localCodearea.scrollHeight;
     }
   },
   setMultipleFormCaptures: function(){
     formsObject = {};
     var codeareas = document.getElementsByClassName('code-area');
-
+    
     for (var i=0; i<codeareas.length; i++){
       var answerIndex = codeareas[i].getAttribute("data-answer-id");
-      formsObject[answerIndex] = JSON.parse(codeareas[i].getAttribute("data-answer-array")) || [];
+      var answerArray = codeareas[i].getAttribute("data-answer-array");
+      formsObject[answerIndex] = JSON.parse(answerArray) || [];
       formsObject[answerIndex][0] = "";
     }
     return formsObject;

@@ -24,10 +24,10 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @resources = @question.resources.order(created_at: :desc)
+    @resources = @question.resources.order(votes: :desc)
     # if current user have submitted answers to the question, then will show the answers list to the question
     @user = current_user
-    @answers = @question.answers.order(created_at: :desc)
+    @answers = @question.answers.order(votes: :desc)
   end
 
   def new
