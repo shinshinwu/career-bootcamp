@@ -125,7 +125,13 @@ Recorder.prototype.initStream = function( success ){
 
   Recorder.getUserMedia(
     { audio : audioOptions },
-    function( stream ){ that.onStreamInit( stream, success ); }, 
+    function( stream ){ 
+      that.onStreamInit( stream, success ); // modifies this callback for own JS
+      document.getElementById('record-btn').classList.remove("record-disabled");
+      document.getElementById('record-btn').classList.add("record-inactive");
+      document.getElementById('record-btn').disabled = false;
+      document.getElementById('audio-error').classList.add("hide");
+    }, 
     function( e ){ throw e; }
   );
 };

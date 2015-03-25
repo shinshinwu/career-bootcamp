@@ -3,7 +3,6 @@ var FormController = function(){
   this.formEvent();
   this.formPending = false;
   this.formCaptures = this.setMultipleFormCaptures();
-  console.log(this.formCaptures);
 };
 
 FormController.prototype = {
@@ -55,5 +54,3 @@ FormController.prototype = {
     return formsObject;
   }
 };
-
-// formController = new FormController();
