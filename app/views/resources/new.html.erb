@@ -7,15 +7,15 @@
       <%= form_for @resource, url: {action: "create"}, html: {class: "pure-form pure-form-stacked"} do |f| %>
         <br>
         <fieldset>
-        <legend>Add New Resource to help your fellow job hunters to review topics related to the question</legend>
+        <legend>Add a new resource for reviewing this question</legend>
         <%= f.label :title, 'A concise title for your resource' %>
-        <%= f.text_field :title, placeholder: 'Secret of the Universe' %>
+        <%= f.text_field :title, placeholder: 'Git workflow, illustrated' %>
 
         <%= f.label :link, 'Link to external resource' %>
         <%= f.text_field :link, placeholder: 'http://www.greatresource.com' %>
 
-        <%= f.label :content, 'Add some details about your resource' %>
-        <%= f.text_area :content, :rows => 10, :class => "pure-input-1", placeholder: 'This resource explains alpha and is great because of beta...' %>
+        <%= f.label :content, 'Add details about your resource' %>
+        <%= f.text_area :content, :rows => 10, :class => "pure-input-1", placeholder: "This resource is the best I've seen because..." %>
         <br>
         <%= f.submit "Submit", :class => 'pure-button' %>
         </fieldset>
