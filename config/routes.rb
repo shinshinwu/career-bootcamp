@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'tracks' => 'questions#index'
   get 'questions/tracks/:track' => 'questions#track'
   get 'questions/tracks/:track/topics/:topic' => 'questions#topic'
+  get 'ycdemo' => 'sessions#ycdemo'
   resources :questions, except: [:edit, :update] do
     member do
       get 'upvote', to: 'questions#upvote'
